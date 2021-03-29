@@ -1,0 +1,28 @@
+.productCard {
+  width: 200px;
+  height: 280px;
+  border: 1px solid rgba(128, 128, 128, 0.308);
+  margin: 0.5rem;
+  flex-shrink: 0;
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+
+.image {
+  width: 100%;
+}
+
+.image > img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.name {
+  margin: 1rem;
+}
+
+.price {
+  margin: 1rem;
+  font-weight: bold;
+}
