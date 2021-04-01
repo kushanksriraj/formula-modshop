@@ -1,0 +1,16 @@
+.likeBtn {
+  border-radius: 50%;
+  right: 0.5rem;
+  top: 0.5rem;
+  border: none;
+}
+
+.likeBtn div {
+  width: 25px;
+  height: 25px;
+  margin: 0.2rem;
+}
+
+.likeBtn:focus {
+  outline: none;
+}

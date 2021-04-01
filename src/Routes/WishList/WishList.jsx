@@ -1,11 +1,11 @@
-import styles from "./Cart.module.css";
-import { CartTotal, ProductCard } from "../../Components";
-import { ProductPage } from "../../Routes";
-import { useCart, useControl } from "../../hooks";
+import { useControl, useWishList } from "../../hooks";
+import { ProductPage } from "../../Routes/";
+import { ProductCard } from "../../Components";
+import styles from "./Wishlist.module.css";
 
-export const Cart = () => {
+export const WishList = () => {
+  const { wishList, totalItemsInWishList } = useWishList();
   const { isProductSelected } = useControl();
-  const { totalCartItems, cartList } = useCart();
 
   return (
     <>
@@ -13,11 +13,13 @@ export const Cart = () => {
         <ProductPage />
       ) : (
         <>
-          {totalCartItems() > 0 ? (
+          {totalItemsInWishList() > 0 ? (
             <div>
-              <div className={styles.title}>Cart : {totalCartItems()}</div>
+              <div className={styles.title}>
+                Wishlist : {totalItemsInWishList()}
+              </div>
               <div className={styles.homeWrapper}>
-                {cartList.map(({ id, image, name, price }) => {
+                {wishList.map(({ id, image, name, price }) => {
                   return (
                     <ProductCard
                       key={id}
@@ -25,15 +27,15 @@ export const Cart = () => {
                       image={image}
                       name={name}
                       price={price}
-                      renderedIn={"cart"}
                     />
                   );
                 })}
-                <CartTotal />
               </div>
             </div>
           ) : (
-            <div className={styles.cartEmptyPrompt}>Your cart is empty!</div>
+            <div className={styles.wishListEmptyPrompt}>
+             Your wishlist is empty!
+            </div>
           )}
         </>
       )}

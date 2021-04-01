@@ -1,15 +1,30 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom";
-import { ProductProvider } from "./Components/Helper/context";
+import {
+  ControlProvider,
+  ProductProvider,
+  CartProvider,
+  WishListProvider
+} from "./contexts";
+
+import mockServer from "./api/mock.server";
 
 import App from "./App";
+
+mockServer();
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <StrictMode>
-    <ProductProvider>
-    <App />
-    </ProductProvider>
+    <ControlProvider>
+      <ProductProvider>
+        <CartProvider>
+          <WishListProvider>
+            <App />
+          </WishListProvider>
+        </CartProvider>
+      </ProductProvider>
+    </ControlProvider>
   </StrictMode>,
   rootElement
 );

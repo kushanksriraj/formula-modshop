@@ -1,41 +1,32 @@
-import { useAddToCart } from "./useAddToCart";
 import styles from "./AddToCartButton.module.css";
-import { useProduct, useRoute } from "../Helper/context";
+import { useProduct, useCart, useControl } from "../../hooks";
+import { ToastMsg } from "../";
 
 export const AddToCartButton = ({ id }) => {
-  const { addToCart, isAlreadyInCart } = useAddToCart();
-  const { dispatch } = useRoute();
-  const {
-    state: { productList }
-  } = useProduct();
-
-  const isInStock = (id) => {
-    return productList.filter((product) => product.id === id)[0].inStock;
-  };
+  const { isLoading, addToCart, isAlreadyInCart } = useCart();
+  const { isInStock } = useProduct();
+  const { changeRouteOnClick } = useControl();
 
   return (
     <>
       {isAlreadyInCart(id) ? (
         <button
-          className={styles.addToCartBtn}
-          onClick={() =>
-            dispatch({
-              type: "CHANGE_ROUTE",
-              payload: {
-                route: "cart"
-              }
-            })
-          }
+          className={`btn font-md btn-secondary ${styles.btnMd}`}
+          onClick={() => changeRouteOnClick("cart")}
         >
           Go to cart
         </button>
       ) : isInStock(id) ? (
-        <button onClick={() => addToCart(id)} className={styles.addToCartBtn}>
+        <button
+          onClick={() => addToCart(id)}
+          className={`btn font-md btn-primary ${styles.btnBig}`}
+        >
           Add to cart
         </button>
       ) : (
         "Out of stock!"
       )}
+      {isLoading && <ToastMsg msg={"Adding to cart..."} />}
     </>
   );
 };

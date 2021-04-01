@@ -1,0 +1,426 @@
+/* 
+ Table of contents:
+1. Global styles
+2. Utility classes
+3. Components 
+   3.1 Avatar
+   3.2 Badge
+   3.3 Card
+*/
+
+/* 
+ // Global styles 
+*/
+
+* {
+  font-family: "Open Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-1: #1f1f27;
+  --color-2: #f3f4f6;
+  --color-3: #dc2626;
+  --color-4: red;
+  --color-5: green;
+  --color-6: grey;
+  --color-7: #d1d5db;
+}
+
+button {
+  cursor: pointer;
+}
+
+/*
+ // Utility classes
+*/
+
+.border-round {
+  border-radius: 50%;
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+}
+
+.icon > svg {
+  width: 100%;
+  height: auto;
+}
+
+.font-sm {
+  font-size: 0.6em;
+}
+
+.font-md {
+  font-size: 0.9em;
+}
+
+.center-item {
+  display: grid;
+  place-items: center;
+}
+
+/* 
+ // Avatar
+*/
+
+.avatar-sm {
+  width: 30px;
+  height: 30px;
+}
+
+.avatar-md {
+  width: 50px;
+  height: 50px;
+}
+
+.avatar-big {
+  width: 80px;
+  height: 80px;
+}
+
+/* 
+ // Badge
+*/
+
+.badge-icon {
+  position: relative;
+  bottom: 3rem;
+  left: 1.2rem;
+  font-weight: bold;
+  background-color: var(--color-4);
+  width: 1rem;
+  height: 1rem;
+  color: var(--color-2);
+}
+
+.badge-avatar {
+  position: relative;
+  bottom: 1.4rem;
+  left: 2.4rem;
+  font-weight: bold;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid var(--color-2);
+}
+
+.badge-avatar-red {
+  background-color: var(--color-4);
+}
+
+.badge-avatar-green {
+  background-color: var(--color-5);
+}
+
+.badge-avatar-grey {
+  background-color: var(--color-6);
+}
+
+/* 
+ // Button
+*/
+
+.btn {
+  border: none;
+  border-radius: 5px;
+  color: var(--color-2);
+}
+
+.btn-primary {
+  background-color: var(--color-3);
+  width: 70px;
+  height: 30px;
+}
+
+.btn-primary:focus {
+  outline: none;
+  border-bottom: 4px solid var(--color-1);
+}
+
+.btn-secondary {
+  background-color: var(--color-1);
+  width: 80px;
+  height: 30px;
+}
+
+.btn-secondary:focus {
+  outline: none;
+  border-bottom: 4px solid var(--color-3);
+}
+
+.btn-link {
+  border: none;
+  background-color: inherit;
+  color: var(--color-1);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.btn-link:hover {
+  font-weight: bold;
+}
+
+.btn-link:focus {
+  outline: none;
+  font-weight: 800;
+}
+
+.btn-icon {
+  background-color: inherit;
+  border: none;
+}
+
+.btn-icon:focus {
+  outline: none;
+  padding-bottom: 4px;
+  border-bottom: 4px solid var(--color-1);
+}
+
+/* To refactor below code */
+
+.btn-float {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  width: 50px;
+  height: 50px;
+  background-color: inherit;
+  border-radius: 50%;
+  border: 1px solid var(--color-4);
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-float:focus {
+  outline: none;
+  border: 4px solid var(--color-4);
+}
+
+/* 
+ // Card
+*/
+
+.card {
+  width: 200px;
+  height: 300px;
+  padding: 0.8rem;
+  border-radius: 5px;
+  box-shadow: 0 0 6px var(--color-7);
+  margin: 0.5rem;
+}
+
+.card-badge {
+  position: relative;
+  bottom: 305px;
+  left: 185px;
+  background-color: red;
+  height: 22px;
+  width: 22px;
+  border-radius: 50%;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+}
+
+.title-product {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.price-product {
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
+
+.card-text-overlay {
+  font-weight: bold;
+  width: fit-content;
+  background-color: red;
+  padding: 0.1rem 0.3rem;
+  border-radius: 5px;
+  color: white;
+  font-size: 0.9rem;
+  position: relative;
+  bottom: 280px;
+  right: 5px;
+}
+
+.card-horizontal {
+  width: 300px;
+  height: 200px;
+}
+
+.img-responsive {
+  width: 100%;
+  height: auto;
+}
+
+.img-container {
+  width: 300px;
+}
+
+.img-round {
+  border-radius: 20px;
+}
+
+.textbox {
+  width: 230px;
+  padding: 0.2rem;
+  resize: none;
+  border-radius: 5px;
+  border: 4px solid var(--color-2);
+}
+
+.textbox:focus {
+  outline: none;
+}
+
+.list-spaced {
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+  padding-inline-start: 0;
+}
+
+.list-spaced > li {
+  margin: 0 1rem;
+}
+
+.list-stacked {
+  list-style: none;
+  padding-inline-start: 0;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.list-stacked > li {
+  margin-bottom: 0.5rem;
+}
+
+.nav-desktop {
+  width: 100%;
+}
+
+.nav-list {
+  justify-content: space-around;
+}
+
+.nav-item {
+  border-right: 1px solid black;
+  width: 100%;
+  text-align: center;
+}
+
+.nav-item:last-child {
+  border: none;
+}
+
+.modal-bg {
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffffffb4;
+  position: fixed;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  display: none;
+  z-index: 2;
+}
+
+.modal {
+  background-color: white;
+  width: 50vw;
+  height: 60vh;
+  border: 1px solid var(--color-2);
+  border-radius: 5px;
+  box-shadow: 0 0 10px #d1d5db;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.grid-two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.grid-three {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 1rem;
+}
+
+.heading-1 {
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+.heading-2 {
+  font-weight: bold;
+  font-size: 1.3rem;
+  margin: 0.3rem 0;
+}
+
+.heading-3 {
+  font-weight: bold;
+  font-size: 1rem;
+  margin: 1rem 0;
+  margin-bottom: 0.5rem;
+}
+
+.txt-small {
+  font-size: 0.7rem;
+}
+
+.txt-grey {
+  color: grey;
+}
+
+.txt-center {
+  text-align: center;
+}
+
+.toast {
+  border: 1px solid var(--color-3);
+  background-color: white;
+  padding: 0.2rem;
+  border-radius: 5px;
+  width: fit-content;
+  position: fixed;
+  left: 1rem;
+  bottom: 1rem;
+  z-index: 4;
+}
+
+.btn-hide-toast {
+  margin-left: 1rem;
+  padding: 0 0.5rem;
+  background-color: inherit;
+  border: 4px solid #00ffa2;
+  border-radius: 5px;
+}
+
+.btn-hide-toast:focus {
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.code-snippet {
+  width: 100%;
+  height: auto;
+  margin-top: 1rem;
+}

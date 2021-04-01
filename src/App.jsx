@@ -1,54 +1,36 @@
 import "./styles.css";
-import { Home, Cart, Wishlist, ProductPage, Checkout} from "./Routes";
-import { useRoute } from "./Components/Helper/context";
+import { Home, Cart, WishList, Checkout } from "./Routes";
+import { useControl, useProduct } from "./hooks";
+import { useEffect, useState } from "react";
+import { useAxios } from "./hooks/useAxios";
+import { Navbar } from "./Components";
 
 export default function App() {
-  const { route, dispatch } = useRoute();
+  const { route } = useControl();
+  const { setProductList } = useProduct();
+  const { apiCall, response, isLoading } = useAxios();
+  const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    apiCall({
+      type: "get",
+      url: "/api/product-list"
+    });
+  }, []);
+
+  useEffect(() => {
+    if (response && response.status === 200) {
+      setProductList(response.data.productLists);
+    }
+  }, [response]);
 
   return (
     <div className="App">
-      <button
-        onClick={() =>
-          dispatch({
-            type: "CHANGE_ROUTE",
-            payload: {
-              route: "home"
-            }
-          })
-        }
-      >
-        Home
-      </button>
-      <button
-        onClick={() =>
-          dispatch({
-            type: "CHANGE_ROUTE",
-            payload: {
-              route: "cart"
-            }
-          })
-        }
-      >
-        Cart
-      </button>
-
-      <button
-        onClick={() =>
-          dispatch({
-            type: "CHANGE_ROUTE",
-            payload: {
-              route: "wishlist"
-            }
-          })
-        }
-      >
-        Wishlist
-      </button>
-      {route === "home" && <Home />}
+      <Navbar search={search} setSearch={setSearch} />
+      {route === "home" && <Home search={search} isLoading={isLoading} />}
       {route === "cart" && <Cart />}
-      {route === "wishlist" && <Wishlist />}
-      {route ==="product" && <ProductPage />}
-      {route ==="checkout" && <Checkout />}
+      {route === "wishlist" && <WishList />}
+      {route === "checkout" && <Checkout />}
     </div>
   );
 }
