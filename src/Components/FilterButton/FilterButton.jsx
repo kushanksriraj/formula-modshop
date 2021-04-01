@@ -1,26 +1,14 @@
-import { useProduct } from "../../Components/Helper/context";
+import styles from "./FilterButton.module.css";
+
+import { useControl } from "../../hooks";
 
 export const FilterButton = () => {
-  const {
-    state: { filters },
-    dispatch
-  } = useProduct();
-
-  const filterOutOfStock = () => {
-    dispatch({
-      type: "TOGGLE_INVENTORY"
-    });
-  };
-
-  const filterFastDelivery = () => {
-    dispatch({
-      type: "TOGGLE_DELIVERY"
-    });
-  };
+  const { filters, filterOutOfStock, filterFastDelivery } = useControl();
 
   return (
-    <>
-      <div>
+    <div className={styles.filterCard}>
+      <div className={styles.title}>Filter by</div>
+      <div className={styles.section}>
         <label htmlFor="out-of-stock">
           <input
             type="checkbox"
@@ -32,7 +20,7 @@ export const FilterButton = () => {
           Include out of stock
         </label>
       </div>
-      <div>
+      <div className={styles.section}>
         <label htmlFor="fast-delivery">
           <input
             type="checkbox"
@@ -44,6 +32,6 @@ export const FilterButton = () => {
           Fast delivery only
         </label>
       </div>
-    </>
+    </div>
   );
 };

@@ -1,28 +1,60 @@
-.productCard {
-  width: 200px;
-  height: 280px;
-  border: 1px solid rgba(128, 128, 128, 0.308);
-  margin: 0.5rem;
-  flex-shrink: 0;
-  padding: 0.5rem;
-  border-radius: 5px;
-}
-
 .image {
   width: 100%;
+  flex-grow: 1;
 }
 
-.image > img {
-  width: 100%;
-  height: auto;
-  border-radius: 5px;
-}
-
-.name {
-  margin: 1rem;
+.title {
+  margin: 0.5rem 0.2rem;
+  margin-left: 0.5rem;
+  font-weight: bold;
+  font-size: 0.9rem;
 }
 
 .price {
-  margin: 1rem;
+  margin: 0.5rem;
   font-weight: bold;
+}
+
+.productCard {
+  height: 350px;
+  padding: 0.5rem;
+  box-shadow: none;
+  border: 1px solid #0000000e;
+  border-radius: 0;
+  max-width: 300px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+.wishListBtn {
+  background-color: #ffffffe0;
+}
+
+.wishListBtn button {
+    position: absolute;
+    border-radius: 50%;
+    right: 0.5rem;
+    top: 0.5rem;
+    border: none;
+}
+
+@media screen and (max-width: 720px) {
+  .productCard {
+    height: 260px;
+    padding: 0.3rem;
+    box-shadow: none;
+    border: 1px solid #0000000e;
+    border-radius: 0;
+    max-width: 200px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+  }
+
+  .wishListBtn {
+    background-color: #ffffffe0;
+  }
 }

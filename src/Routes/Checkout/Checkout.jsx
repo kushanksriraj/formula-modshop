@@ -1,33 +1,21 @@
-import { useRoute } from "../../Components/Helper/context";
-import { useCart } from "../../Routes/Cart/useCart";
-import { CartTotal } from "../../Components/CartTotal/CartTotal";
+import { CartTotal } from "../../Components";
+import { useControl, useCart } from "../../hooks";
 
 export const Checkout = () => {
-  const { dispatch } = useRoute();
-  const { cartItems } = useCart();
+  const { changeRouteOnClick } = useControl();
+  const { cartList } = useCart();
 
   return (
     <div>
-      <button
-        onClick={() =>
-          dispatch({
-            type: "CHANGE_ROUTE",
-            payload: {
-              route: "cart"
-            }
-          })
-        }
-      >
-        {"<- Back"}
-      </button>
+      <button onClick={() => changeRouteOnClick("cart")}>{"<- Back"}</button>
 
       <h4>Checkout:</h4>
-      {cartItems.map((product) => {
+      {cartList.map(({ id, name, price, quantity }) => {
         return (
-          <div>
-            <h4>Name: {product.name}</h4>
-            <h4>Price: {product.price}</h4>
-            <h4>Quantity: {product.quantity}</h4>
+          <div key={id}>
+            <h4>Name: {name}</h4>
+            <h4>Price: {price}</h4>
+            <h4>Quantity: {quantity}</h4>
           </div>
         );
       })}

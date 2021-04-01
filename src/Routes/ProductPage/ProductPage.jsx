@@ -1,30 +1,35 @@
-import { useRoute } from "../../Components/Helper/context";
-import { useProduct } from "../../Components/Helper/context";
+import styles from "./ProductPage.module.css";
+import { useProduct, useControl } from "../../hooks";
+import { WishListButton, AddToCartButton } from "../../Components";
 
 export const ProductPage = () => {
-  const { dispatch } = useRoute();
-  const { state } = useProduct();
+  const { unSelectProductOnClick, selectedProductId } = useControl();
+  const { getSelectedProduct } = useProduct();
 
-  const id = state.selectedProductId;
-  const product = state.productList.filter((product) => product.id === id)[0];
+  const product = getSelectedProduct(selectedProductId);
 
   return (
-    <div>
+    <div className={styles.modal}>
       <button
-        onClick={() =>
-          dispatch({
-            type: "CHANGE_ROUTE",
-            payload: {
-              route: "home"
-            }
-          })
-        }
+        onClick={unSelectProductOnClick}
+        className="btn font-md btn-secondary"
       >
-        {"<- Back"}
+        {"Back"}
       </button>
-       
-      <h4>{product.name}</h4>
-      <img src={product.image} alt="" />
+      <div className={styles.wrapper}>
+        <div className={styles["img-wrapper"]}>
+          <img src={product.image} alt="" />
+        </div>
+
+        <div className={styles.contentWrapper}>
+          <div className={styles.name}>{product.name}</div>
+          <div className={styles.price}>₹{product.price}</div>
+          <div className={styles.wishListButton}>
+          <WishListButton id={selectedProductId} />
+          </div>
+          <AddToCartButton id={selectedProductId} />
+        </div>
+      </div>
     </div>
   );
 };

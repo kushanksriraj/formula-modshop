@@ -1,14 +1,10 @@
-import { useCart } from "../../Routes/Cart/useCart";
+import { useCart } from "../../hooks";
+import styles from "./CartTotal.module.css";
 
 export const CartTotal = () => {
-  const { cartItems } = useCart();
+  const { totalCartPrice } = useCart();
 
-  const totalPrice = () => {
-    return cartItems.reduce(
-      (acc, product) => acc + product.quantity * product.price,
-      0
-    );
-  };
-
-  return <div>Total : ₹{totalPrice()}</div>;
+  return (
+    <div className={styles.cartTotalWrapper}>Total : ₹{totalCartPrice()}</div>
+  );
 };

@@ -1,32 +1,29 @@
 import styles from "./ProductCard.module.css";
-import { AddToCartButton } from "../AddToCartButton/AddToCartButton";
-import { WishlistButton } from "../WishlistButton/WishlistButton";
-import { useRoute } from "../../Components/Helper/context";
+import { WishListButton, CartModifyButtons, RemoveFromCartButton } from "../";
 
-export const ProductCard = ({ id, image, name, price }) => {
-  const { dispatch } = useRoute();
+import { useControl } from "../../hooks";
+
+export const ProductCard = ({ id, image, name, price, renderedIn }) => {
+  const { selectProductOnClick } = useControl();
 
   return (
     <div className={styles.productCard}>
-      <div
-        onClick={() =>
-          dispatch({
-            type: "CHANGE_ROUTE_ON_SELECT",
-            payload: {
-              route: "product",
-              id
-            }
-          })
-        }
-      >
-        <div className={styles.image}>
-          <img src={image} alt="" />
-        </div>
-        <div className={styles.name}>{name}</div>
+      <div className={styles.image} onClick={() => selectProductOnClick(id)}>
+        <img className="img-responsive" src={image} alt="" />
       </div>
-      <div className={styles.price}>₹{price}</div>
-      <WishlistButton id={id} />
-      <AddToCartButton id={id} />
+
+      <div>
+        <div className={styles.title} onClick={() => selectProductOnClick(id)}>
+          {name}
+        </div>
+
+        <div className={styles.price}>₹{price}</div>
+      </div>
+
+      <div className={styles.wishListBtn}>
+        <WishListButton id={id} />
+      </div>
+      {renderedIn === "cart" && <CartModifyButtons id={id} />}
     </div>
   );
 };

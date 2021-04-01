@@ -1,0 +1,31 @@
+.cartModifyBtnsWrapper {
+  padding-top: 0.25rem;
+  border-top: 1px solid #0000000c;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.decrementBtn {
+  width: 20px;
+  height: 20px;
+}
+
+.decrementBtn:focus {
+  padding-bottom: 0;
+  border: none;
+}
+
+.itemQty {
+  font-weight: bold;
+}
+
+.incrementBtn {
+  width: 20px;
+  height: 20px;
+}
+
+.incrementBtn:focus {
+  padding-bottom: 0;
+  border: none;
+}
