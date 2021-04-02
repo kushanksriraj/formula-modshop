@@ -49,12 +49,12 @@ export const useProduct = () => {
       : filteredProductList;
   };
 
-  const getSelectedProduct = (id) => {
-    return productList.filter((product) => product.id === id)[0];
+  const getSelectedProduct = (productId) => {
+    return productList.filter((product) => product.productId === productId)[0];
   };
 
-  const isInStock = (id) => {
-    return productList.filter((product) => product.id === id)[0].inStock;
+  const isInStock = (productId) => {
+    return productList.filter((product) => product.productId === productId)[0].inStock;
   };
 
   return {

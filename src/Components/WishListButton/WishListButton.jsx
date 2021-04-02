@@ -2,7 +2,7 @@ import { useWishList } from "../../hooks";
 import { ToastMsg } from "../";
 import styles from "./WishListButton.module.css";
 
-export const WishListButton = ({ id }) => {
+export const WishListButton = ({ productId }) => {
   const {
     isLoading,
     isAlreadyInWishList,
@@ -15,14 +15,14 @@ export const WishListButton = ({ id }) => {
       <button
         className={styles.likeBtn}
         onClick={() => {
-          isAlreadyInWishList(id) ? removeFromWishList(id) : addToWishList(id);
+          isAlreadyInWishList(productId) ? removeFromWishList(productId) : addToWishList(productId);
         }}
         disabled={isLoading ? true : false}
       >
         <div
           className="icon"
           style={{
-            fill: isAlreadyInWishList(id) ? "var(--color-4)" : "var(--color-1)"
+            fill: isAlreadyInWishList(productId) ? "var(--color-4)" : "var(--color-1)"
           }}
         >
           <svg

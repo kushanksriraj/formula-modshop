@@ -1,19 +1,25 @@
 import styles from "./ProductCard.module.css";
-import { WishListButton, CartModifyButtons, RemoveFromCartButton } from "../";
+import { WishListButton, CartModifyButtons } from "../";
 
 import { useControl } from "../../hooks";
 
-export const ProductCard = ({ id, image, name, price, renderedIn }) => {
+export const ProductCard = ({ productId, image, name, price, renderedIn }) => {
   const { selectProductOnClick } = useControl();
 
   return (
     <div className={styles.productCard}>
-      <div className={styles.image} onClick={() => selectProductOnClick(id)}>
+      <div
+        className={styles.image}
+        onClick={() => selectProductOnClick(productId)}
+      >
         <img className="img-responsive" src={image} alt="" />
       </div>
 
       <div>
-        <div className={styles.title} onClick={() => selectProductOnClick(id)}>
+        <div
+          className={styles.title}
+          onClick={() => selectProductOnClick(productId)}
+        >
           {name}
         </div>
 
@@ -21,9 +27,9 @@ export const ProductCard = ({ id, image, name, price, renderedIn }) => {
       </div>
 
       <div className={styles.wishListBtn}>
-        <WishListButton id={id} />
+        <WishListButton productId={productId} />
       </div>
-      {renderedIn === "cart" && <CartModifyButtons id={id} />}
+      {renderedIn === "cart" && <CartModifyButtons productId={productId} />}
     </div>
   );
 };

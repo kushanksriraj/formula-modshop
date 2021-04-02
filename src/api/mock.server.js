@@ -33,9 +33,9 @@ export default function mockServer() {
       });
 
       this.del("/wish-list/:id", (schema, request) => {
-        const id = request.params.id;
-        schema.wishLists.find(id).destroy();
-        return id;
+        const productId = request.params.id;
+        schema.wishLists.findBy({ productId: productId }).destroy();
+        return productId;
       });
 
       this.get("/cart-list", (schema, request) => {
@@ -48,22 +48,22 @@ export default function mockServer() {
       });
 
       this.del("/cart-list/:id", (schema, request) => {
-        const id = request.params.id;
-        schema.cartLists.find(id).destroy();
-        return id;
+        const productId = request.params.id;
+        schema.cartLists.findBy({ productId: productId }).destroy();
+        return productId;
       });
 
       this.patch("/cart-list/:id", (schema, request) => {
-        const id = request.params.id;
+        const productId = request.params.id;
         let attrs = JSON.parse(request.requestBody).product;
-        return schema.cartLists.find(id).update(attrs);
+        return schema.cartLists.findBy({ productId: productId }).update(attrs);
       });
     },
 
     seeds(server) {
       [...Array(50)].forEach((_) => {
         server.create("productList", {
-          id: faker.datatype.uuid(),
+          productId: faker.datatype.uuid(),
           name: faker.commerce.productName(),
           image: faker.random.image(),
           price: faker.commerce.price(),

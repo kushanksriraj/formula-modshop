@@ -10,7 +10,7 @@ export const wishListReducer = (state, action) => {
       return {
         ...state,
         wishList: state.wishList.filter(
-          (product) => product.id !== action.payload.id
+          (product) => product.productId !== action.payload.productId
         )
       };
 

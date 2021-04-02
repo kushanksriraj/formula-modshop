@@ -32,7 +32,7 @@ export const useWishList = () => {
             dispatch({
               type: "REMOVE_FROM_WISHLIST",
               payload: {
-                id: response.data
+                productId: response.data
               }
             });
           }
@@ -52,27 +52,29 @@ export const useWishList = () => {
     return wishList.length;
   };
 
-  const addToWishList = (id) => {
-    const product = productList.filter((product) => product.id === id)[0];
+  const addToWishList = (productId) => {
+    const product = productList.filter((product) => product.productId === productId)[0];
+
+    const {id, ...productNoId} = product;
 
     apiCall({
       type: "post",
       url: "/api/wish-list",
       body: {
-        product: { ...product }
+        product: { ...productNoId }
       }
     });
   };
 
-  const removeFromWishList = (id) => {
+  const removeFromWishList = (productId) => {
     apiCall({
       type: "delete",
-      url: `/api/wish-list/${id}`
+      url: `/api/wish-list/${productId}`
     });
   };
 
-  const isAlreadyInWishList = (id) => {
-    return wishList.some((product) => product.id === id);
+  const isAlreadyInWishList = (productId) => {
+    return wishList.some((product) => product.productId === productId);
   };
 
   return {

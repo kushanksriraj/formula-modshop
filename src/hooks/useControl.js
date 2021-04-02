@@ -16,11 +16,11 @@ export const useControl = () => {
     });
   };
 
-  const selectProductOnClick = (id) => {
+  const selectProductOnClick = (productId) => {
     dispatch({
       type: "SELECT_PRODUCT",
       payload: {
-        id
+        productId
       }
     });
   };

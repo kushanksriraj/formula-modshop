@@ -5,21 +5,21 @@ export const controlReducer = (state, action) => {
         ...state,
         route: action.payload.route,
         isProductSelected: false,
-        selectedProductId: null
+        selectedProductID: null
       };
 
     case "SELECT_PRODUCT":
       return {
         ...state,
         isProductSelected: true,
-        selectedProductId: action.payload.id
+        selectedProductID: action.payload.productId
       };
 
     case "UNSELECT_PRODUCT":
       return {
         ...state,
         isProductSelected: false,
-        selectedProductId: null
+        selectedProductID: null
       };
 
     case "SORT":

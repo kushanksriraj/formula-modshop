@@ -35,11 +35,11 @@ export const Home = ({ search, isLoading }) => {
           </div>
 
           <div className={styles.homeWrapper}>
-            {searchedProductList.map(({ id, image, name, price }) => {
+            {searchedProductList.map(({ productId, image, name, price }) => {
               return (
                 <ProductCard
-                  key={id}
-                  id={id}
+                  key={productId}
+                  productId={productId}
                   image={image}
                   name={name}
                   price={price}

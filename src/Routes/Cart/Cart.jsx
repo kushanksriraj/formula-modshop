@@ -17,11 +17,11 @@ export const Cart = () => {
             <div>
               <div className={styles.title}>Cart : {totalCartItems()}</div>
               <div className={styles.homeWrapper}>
-                {cartList.map(({ id, image, name, price }) => {
+                {cartList.map(({ productId, image, name, price }) => {
                   return (
                     <ProductCard
-                      key={id}
-                      id={id}
+                      key={productId}
+                      productId={productId}
                       image={image}
                       name={name}
                       price={price}

@@ -1,7 +1,7 @@
 
 export const ToastMsg = ({msg}) => {
   return (
-    <div class="toast">
+    <div className="toast">
     {msg}
   </div>
   );

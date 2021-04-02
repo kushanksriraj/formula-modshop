@@ -3,10 +3,10 @@ import { useProduct, useControl } from "../../hooks";
 import { WishListButton, AddToCartButton } from "../../Components";
 
 export const ProductPage = () => {
-  const { unSelectProductOnClick, selectedProductId } = useControl();
+  const { unSelectProductOnClick, selectedProductID } = useControl();
   const { getSelectedProduct } = useProduct();
 
-  const product = getSelectedProduct(selectedProductId);
+  const product = getSelectedProduct(selectedProductID);
 
   return (
     <div className={styles.modal}>
@@ -25,9 +25,9 @@ export const ProductPage = () => {
           <div className={styles.name}>{product.name}</div>
           <div className={styles.price}>₹{product.price}</div>
           <div className={styles.wishListButton}>
-          <WishListButton id={selectedProductId} />
+          <WishListButton productId={selectedProductID} />
           </div>
-          <AddToCartButton id={selectedProductId} />
+          <AddToCartButton productId={selectedProductID} />
         </div>
       </div>
     </div>

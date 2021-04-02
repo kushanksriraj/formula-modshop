@@ -2,7 +2,7 @@ import { useCart } from "../../hooks";
 import styles from "./CartModifyButtons.module.css";
 import { ToastMsg } from "../";
 
-export const CartModifyButtons = ({ id }) => {
+export const CartModifyButtons = ({ productId }) => {
   const {
     isLoading,
     decrement,
@@ -16,11 +16,11 @@ export const CartModifyButtons = ({ id }) => {
       <button
         className={`btn-icon ${styles.decrementBtn}`}
         onClick={() => {
-          cartItemQuantity(id) > 1 ? decrement(id) : removeFromCart(id);
+          cartItemQuantity(productId) > 1 ? decrement(productId) : removeFromCart(productId);
         }}
       >
         <div className="icon" style={{ width: `18px` }}>
-          {cartItemQuantity(id) > 1 ? (
+          {cartItemQuantity(productId) > 1 ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
               version="1.1"
@@ -32,7 +32,7 @@ export const CartModifyButtons = ({ id }) => {
             >
               <g>
                 <path
-                  class="fil0"
+                  
                   d="M50 0l356 0c28,0 50,26 50,57 0,32 -22,58 -50,58l-356 0c-27,0 -50,-26 -50,-58 0,-31 23,-57 50,-57z"
                 />
               </g>
@@ -56,11 +56,11 @@ export const CartModifyButtons = ({ id }) => {
           )}
         </div>
       </button>
-      <div className={styles.itemQty}>{cartItemQuantity(id)}</div>
+      <div className={styles.itemQty}>{cartItemQuantity(productId)}</div>
 
       <button
         className={`btn-icon ${styles.incrementBtn}`}
-        onClick={() => increment(id)}
+        onClick={() => increment(productId)}
       >
         <div className="icon" style={{ width: `20px` }}>
           <svg
@@ -79,7 +79,7 @@ export const CartModifyButtons = ({ id }) => {
           </svg>
         </div>
       </button>
-      {isLoading && <ToastMsg msg={"Updating quantity...-"} />}
+      {isLoading && <ToastMsg msg={"Updating quantity..."} />}
     </div>
   );
 };

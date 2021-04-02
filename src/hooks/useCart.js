@@ -32,7 +32,7 @@ export const useCart = () => {
             dispatch({
               type: "REMOVE_FROM_CART",
               payload: {
-                id: response.data
+                productId: response.data
               }
             });
           }
@@ -45,7 +45,7 @@ export const useCart = () => {
             dispatch({
               type: "MODIFY_CART_QTY",
               payload: {
-                id: response.data.cartList.id,
+                productId: response.data.cartList.productId,
                 quantity: response.data.cartList.quantity
               }
             });
@@ -62,34 +62,40 @@ export const useCart = () => {
     }
   }, [response]);
 
-  const addToCart = (id) => {
-    const product = productList.filter((product) => product.id === id)[0];
+  const addToCart = (productId) => {
+    const product = productList.filter(
+      (product) => product.productId === productId
+    )[0];
+
+    const { id, ...productNoId } = product;
 
     apiCall({
       type: "post",
       url: "/api/cart-list",
       body: {
         product: {
-          ...product,
+          ...productNoId,
           quantity: 1
         }
       }
     });
   };
 
-  const removeFromCart = (id) => {
+  const removeFromCart = (productId) => {
     apiCall({
       type: "delete",
-      url: `/api/cart-list/${id}`
+      url: `/api/cart-list/${productId}`
     });
   };
 
-  const decrement = (id) => {
-    const prevQty = cartList.filter((product) => product.id === id)[0].quantity;
+  const decrement = (productId) => {
+    const prevQty = cartList.filter(
+      (product) => product.productId === productId
+    )[0].quantity;
 
     apiCall({
       type: "patch",
-      url: `/api/cart-list/${id}`,
+      url: `/api/cart-list/${productId}`,
       body: {
         product: {
           quantity: prevQty - 1
@@ -98,12 +104,14 @@ export const useCart = () => {
     });
   };
 
-  const increment = (id) => {
-    const prevQty = cartList.filter((product) => product.id === id)[0].quantity;
+  const increment = (productId) => {
+    const prevQty = cartList.filter(
+      (product) => product.productId === productId
+    )[0].quantity;
 
     apiCall({
       type: "patch",
-      url: `/api/cart-list/${id}`,
+      url: `/api/cart-list/${productId}`,
       body: {
         product: {
           quantity: prevQty + 1
@@ -112,8 +120,8 @@ export const useCart = () => {
     });
   };
 
-  const isAlreadyInCart = (id) => {
-    return cartList.some((product) => product.id === id);
+  const isAlreadyInCart = (productId) => {
+    return cartList.some((product) => product.productId === productId);
   };
 
   const totalCartItems = () => {
@@ -127,8 +135,9 @@ export const useCart = () => {
     );
   };
 
-  const cartItemQuantity = (id) => {
-    return cartList.filter((product) => product.id === id)[0].quantity;
+  const cartItemQuantity = (productId) => {
+    return cartList.filter((product) => product.productId === productId)[0]
+      .quantity;
   };
 
   return {

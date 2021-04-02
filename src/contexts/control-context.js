@@ -8,7 +8,7 @@ export const ControlProvider = ({ children }) => {
     sortBy: "DEFAULT",
     route: "home",
     isProductSelected: false,
-    selectedProductId: null,
+    selectedProductID: null,
     filters: {
       showAllInventory: true,
       showFastDeliveryOnly: false

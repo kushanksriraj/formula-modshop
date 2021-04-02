@@ -10,7 +10,7 @@ export const cartReducer = (state, action) => {
       return {
         ...state,
         cartList: state.cartList.filter(
-          (product) => product.id !== action.payload.id
+          (product) => product.productId !== action.payload.productId
         )
       };
 
@@ -18,7 +18,7 @@ export const cartReducer = (state, action) => {
       return {
         ...state,
         cartList: state.cartList.map((product) => {
-          if (product.id === action.payload.id) {
+          if (product.productId === action.payload.productId) {
             return { ...product, quantity: action.payload.quantity };
           }
           return product;

@@ -19,11 +19,11 @@ export const WishList = () => {
                 Wishlist : {totalItemsInWishList()}
               </div>
               <div className={styles.homeWrapper}>
-                {wishList.map(({ id, image, name, price }) => {
+                {wishList.map(({ productId, image, name, price }) => {
                   return (
                     <ProductCard
-                      key={id}
-                      id={id}
+                      key={productId}
+                      productId={productId}
                       image={image}
                       name={name}
                       price={price}
