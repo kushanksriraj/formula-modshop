@@ -66,7 +66,7 @@ export const Navbar = ({ search, setSearch }) => {
               </g>
             </svg>
           </div>
-          <div className={styles.title}>Modshop</div>
+          <div className={styles.title}>ModShop</div>
         </div>
 
         <div className={styles.btns}>
