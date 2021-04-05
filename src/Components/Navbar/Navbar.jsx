@@ -1,4 +1,5 @@
 import styles from "./Navbar.module.css";
+import { useNavigate } from "react-router-dom";
 
 import { WishListIcon, CartIcon, SearchBar } from "../";
 import { useControl } from "../../hooks";
@@ -7,6 +8,7 @@ import { useState } from "react";
 export const Navbar = ({ search, setSearch }) => {
   const { changeRouteOnClick } = useControl();
   const [selectSearch, setSelectSearch] = useState(false);
+  let navigate = useNavigate();
 
   return (
     <nav>
@@ -73,21 +75,23 @@ export const Navbar = ({ search, setSearch }) => {
           <button
             className="btn-icon"
             style={{ fill: "white" }}
-            onClick={() => changeRouteOnClick("wishlist")}
+            onClick={() => {
+              navigate("wishlist")
+            }}
           >
             <WishListIcon />
           </button>
           <button
             className="btn-icon"
             style={{ fill: "white" }}
-            onClick={() => changeRouteOnClick("cart")}
+            onClick={() => navigate("cart")}
           >
             <CartIcon />
           </button>
         </div>
       </div>
       <div className={styles.navigationBelow}>
-        <button className="btn-link" onClick={() => changeRouteOnClick("home")}>
+        <button className="btn-link" onClick={() =>  navigate("/")}>
           HOME
         </button>
 

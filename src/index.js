@@ -7,7 +7,7 @@ import {
   WishListProvider
 } from "./contexts";
 
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
 import mockServer from "./api/mock.server";
 
@@ -22,7 +22,9 @@ ReactDOM.render(
       <ProductProvider>
         <CartProvider>
           <WishListProvider>
+            <Router>
             <App />
+            </Router>
           </WishListProvider>
         </CartProvider>
       </ProductProvider>

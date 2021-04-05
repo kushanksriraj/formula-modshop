@@ -20,6 +20,7 @@ export const AddToCartButton = ({ productId }) => {
         <button
           onClick={() => addToCart(productId)}
           className={`btn font-md btn-primary ${styles.btnBig}`}
+          disabled={isLoading ? true : false}
         >
           Add to cart
         </button>
