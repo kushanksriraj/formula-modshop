@@ -1,33 +1,23 @@
 import styles from "./AddToCartButton.module.css";
-import { useProduct, useCart, useControl } from "../../hooks";
-import { ToastMsg } from "../";
-import { useNavigate } from "react-router-dom";
+import { useCart } from "../../hooks";
+import { ToastMsg } from "../../Components";
+import { GoToCartButton } from "./GoToCartButton";
 
 export const AddToCartButton = ({ productId }) => {
   const { isLoading, addToCart, isAlreadyInCart } = useCart();
-  const { isInStock } = useProduct();
-  // const { changeRouteOnClick } = useControl();
-  const navigate = useNavigate();
 
   return (
     <>
       {isAlreadyInCart(productId) ? (
+        <GoToCartButton />
+      ) : (
         <button
-          className={`btn font-md btn-secondary ${styles.btnMd}`}
-          onClick={() => navigate("/cart")}
-        >
-          Go to cart
-        </button>
-      ) : isInStock(productId) ? (
-        <button
-          onClick={() => addToCart(productId)}
           className={`btn font-md btn-primary ${styles.btnBig}`}
-          disabled={isLoading ? true : false}
+          onClick={() => addToCart(productId)}
+          disabled={isLoading}
         >
           Add to cart
         </button>
-      ) : (
-        "Out of stock!"
       )}
       {isLoading && <ToastMsg msg={"Adding to cart..."} />}
     </>

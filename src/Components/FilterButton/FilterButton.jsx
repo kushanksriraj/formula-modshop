@@ -1,5 +1,4 @@
 import styles from "./FilterButton.module.css";
-
 import { useControl } from "../../hooks";
 
 export const FilterButton = () => {

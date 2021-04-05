@@ -2,7 +2,12 @@ import styles from "./SortButton.module.css";
 import { useControl } from "../../hooks";
 
 export const SortButton = () => {
-  const { sortBy, sortLowToHigh, sortHighToLow, clearSort } = useControl();
+  const {
+     sortBy, 
+     sortLowToHigh, 
+     sortHighToLow, 
+     clearSort
+   } = useControl();
 
   return (
     <div className={styles.sortCard}>

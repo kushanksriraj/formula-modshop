@@ -5,6 +5,8 @@ export const CartTotal = () => {
   const { totalCartPrice } = useCart();
 
   return (
-    <div className={styles.cartTotalWrapper}>Total : ₹{totalCartPrice()}</div>
+    <div className={styles.cartTotalWrapper}>
+      Total : ₹{totalCartPrice()}
+    </div>
   );
 };

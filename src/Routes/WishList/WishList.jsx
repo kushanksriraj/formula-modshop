@@ -1,43 +1,18 @@
-import { useControl, useWishList } from "../../hooks";
-import { ProductPage } from "../../Routes/";
-import { ProductCard } from "../../Components";
+import { useWishList } from "../../hooks";
 import styles from "./Wishlist.module.css";
+import { ListWishListProducts } from "./ListWishListProducts";
 
 export const WishList = () => {
-  const { wishList, totalItemsInWishList } = useWishList();
-  const { isProductSelected } = useControl();
+  const { totalItemsInWishList } = useWishList();
 
   return (
     <>
-      {isProductSelected ? (
-        <ProductPage />
+      {totalItemsInWishList() < 1 ? (
+        <div className={styles.wishListEmptyPrompt}>
+          Your wishlist is empty!
+        </div>
       ) : (
-        <>
-          {totalItemsInWishList() > 0 ? (
-            <div>
-              <div className={styles.title}>
-                Wishlist : {totalItemsInWishList()}
-              </div>
-              <div className={styles.homeWrapper}>
-                {wishList.map(({ productId, image, name, price }) => {
-                  return (
-                    <ProductCard
-                      key={productId}
-                      productId={productId}
-                      image={image}
-                      name={name}
-                      price={price}
-                    />
-                  );
-                })}
-              </div>
-            </div>
-          ) : (
-            <div className={styles.wishListEmptyPrompt}>
-             Your wishlist is empty!
-            </div>
-          )}
-        </>
+        <ListWishListProducts />
       )}
     </>
   );

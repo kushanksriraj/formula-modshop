@@ -40,7 +40,6 @@ export const useCart = () => {
           break;
 
         case "patch":
-          console.log({ response });
           if (response.status === 200) {
             dispatch({
               type: "MODIFY_CART_QTY",
@@ -53,7 +52,6 @@ export const useCart = () => {
           break;
 
         case "get":
-          console.log({ response });
           break;
 
         default:

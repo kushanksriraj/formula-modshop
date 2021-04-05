@@ -2,30 +2,27 @@ import styles from "./ProductCard.module.css";
 import { WishListButton, CartModifyButtons } from "../";
 import { useNavigate } from "react-router-dom";
 
-import { useControl } from "../../hooks";
+export const ProductCard = ({ 
+    productId,
+    image,
+    name,
+    price,
+    renderedIn }) => {
 
-export const ProductCard = ({ productId, image, name, price, renderedIn }) => {
-  const { selectProductOnClick } = useControl();
   const navigate = useNavigate();
 
   return (
     <div className={styles.productCard}>
-      <div
-        className={styles.image}
-        onClick={() => navigate(`/product/${productId}`)}
-      >
-        <img className="img-responsive" src={image} alt="" />
-      </div>
-
-      <div>
-        <div
-          className={styles.title}
-          onClick={() => selectProductOnClick(productId)}
-        >
-          {name}
+      <div onClick={() => navigate(`/product/${productId}`)}>
+        <div className={styles.image}>
+          <img className="img-responsive" src={image} alt={name} />
         </div>
 
-        <div className={styles.price}>₹{price}</div>
+        <div>
+          <div className={styles.title}>{name}</div>
+
+          <div className={styles.price}>₹{price}</div>
+        </div>
       </div>
 
       <div className={styles.wishListBtn}>
