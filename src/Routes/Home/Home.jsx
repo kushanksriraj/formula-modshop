@@ -2,6 +2,7 @@ import styles from "./Home.module.css";
 import { SortButton, FilterButton, ProductCard, ToastMsg } from "../../Components";
 import { ProductPage } from "../../Routes";
 import { useProduct, useControl } from "../../hooks";
+import { Outlet } from "react-router-dom";
 
 export const Home = ({ search, isLoading }) => {
   const {
@@ -27,14 +28,15 @@ export const Home = ({ search, isLoading }) => {
     <>
       {isProductSelected ? (
         <ProductPage />
-      ) : (
-        <div className={styles.productWrapper}>
+        ) : (
+          <div className={styles.productWrapper}>
           <div className={styles.optionsWrapper}>
             <SortButton />
             <FilterButton />
           </div>
 
           <div className={styles.homeWrapper}>
+          <Outlet/>
             {searchedProductList.map(({ productId, image, name, price }) => {
               return (
                 <ProductCard

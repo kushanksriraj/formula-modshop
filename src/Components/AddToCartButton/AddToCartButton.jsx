@@ -1,18 +1,20 @@
 import styles from "./AddToCartButton.module.css";
 import { useProduct, useCart, useControl } from "../../hooks";
 import { ToastMsg } from "../";
+import { useNavigate } from "react-router-dom";
 
 export const AddToCartButton = ({ productId }) => {
   const { isLoading, addToCart, isAlreadyInCart } = useCart();
   const { isInStock } = useProduct();
-  const { changeRouteOnClick } = useControl();
+  // const { changeRouteOnClick } = useControl();
+  const navigate = useNavigate();
 
   return (
     <>
       {isAlreadyInCart(productId) ? (
         <button
           className={`btn font-md btn-secondary ${styles.btnMd}`}
-          onClick={() => changeRouteOnClick("cart")}
+          onClick={() => navigate("/cart")}
         >
           Go to cart
         </button>

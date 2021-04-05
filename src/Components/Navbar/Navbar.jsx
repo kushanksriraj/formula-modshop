@@ -8,7 +8,7 @@ import { useState } from "react";
 export const Navbar = ({ search, setSearch }) => {
   const { changeRouteOnClick } = useControl();
   const [selectSearch, setSelectSearch] = useState(false);
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <nav>
@@ -76,7 +76,7 @@ export const Navbar = ({ search, setSearch }) => {
             className="btn-icon"
             style={{ fill: "white" }}
             onClick={() => {
-              navigate("wishlist")
+              navigate("/wishlist");
             }}
           >
             <WishListIcon />
@@ -84,18 +84,17 @@ export const Navbar = ({ search, setSearch }) => {
           <button
             className="btn-icon"
             style={{ fill: "white" }}
-            onClick={() => navigate("cart")}
+            onClick={() => navigate("/cart")}
           >
             <CartIcon />
           </button>
         </div>
       </div>
       <div className={styles.navigationBelow}>
-        <button className="btn-link" onClick={() =>  navigate("/")}>
+        <button className="btn-link" onClick={() => navigate("/products")}>
           HOME
         </button>
 
-       
         {selectSearch && <SearchBar search={search} setSearch={setSearch} />}
 
         <div className={styles.searchButtonWrapper}>
