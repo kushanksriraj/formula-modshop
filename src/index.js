@@ -7,6 +7,8 @@ import {
   WishListProvider
 } from "./contexts";
 
+import { BrowserRouter } from "react-router-dom";
+
 import mockServer from "./api/mock.server";
 
 import App from "./App";
