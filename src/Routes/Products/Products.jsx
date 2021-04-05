@@ -1,4 +1,4 @@
-import styles from "./Home.module.css";
+import styles from "./Products.module.css";
 import {
   SortButton,
   FilterButton,
