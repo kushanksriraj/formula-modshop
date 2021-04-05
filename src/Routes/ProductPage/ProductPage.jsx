@@ -1,33 +1,41 @@
 import styles from "./ProductPage.module.css";
-import { useProduct, useControl } from "../../hooks";
+import { useProduct } from "../../hooks";
+import { useParams, useNavigate } from "react-router-dom";
 import { WishListButton, AddToCartButton } from "../../Components";
 
 export const ProductPage = () => {
-  const { unSelectProductOnClick, selectedProductID } = useControl();
-  const { getSelectedProduct } = useProduct();
+  const { getSelectedProduct, isInStock } = useProduct();
+  const { productId } = useParams();
+  const navigate = useNavigate();
 
-  const product = getSelectedProduct(selectedProductID);
+  const { image, name, price } = getSelectedProduct(productId);
 
   return (
     <div className={styles.modal}>
       <button
-        onClick={unSelectProductOnClick}
+        onClick={() => navigate(-1)}
         className="btn font-md btn-secondary"
       >
-        {"Back"}
+        Back
       </button>
       <div className={styles.wrapper}>
-        <div className={styles["img-wrapper"]}>
-          <img src={product.image} alt="" />
+        <div className={styles.imgWrapper}>
+          <img src={image} alt={name} />
         </div>
 
         <div className={styles.contentWrapper}>
-          <div className={styles.name}>{product.name}</div>
-          <div className={styles.price}>₹{product.price}</div>
+          <div className={styles.name}>{name}</div>
+          <div className={styles.price}>₹{price}</div>
+
           <div className={styles.wishListButton}>
-          <WishListButton productId={selectedProductID} />
+            <WishListButton productId={productId} />
           </div>
-          <AddToCartButton productId={selectedProductID} />
+
+          {isInStock(productId) ? (
+            <AddToCartButton productId={productId} />
+          ) : (
+            "Out of stock!"
+          )}
         </div>
       </div>
     </div>

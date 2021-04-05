@@ -1,30 +1,23 @@
 import styles from "./AddToCartButton.module.css";
-import { useProduct, useCart, useControl } from "../../hooks";
-import { ToastMsg } from "../";
+import { useCart } from "../../hooks";
+import { ToastMsg } from "../../Components";
+import { GoToCartButton } from "./GoToCartButton";
 
 export const AddToCartButton = ({ productId }) => {
   const { isLoading, addToCart, isAlreadyInCart } = useCart();
-  const { isInStock } = useProduct();
-  const { changeRouteOnClick } = useControl();
 
   return (
     <>
       {isAlreadyInCart(productId) ? (
+        <GoToCartButton />
+      ) : (
         <button
-          className={`btn font-md btn-secondary ${styles.btnMd}`}
-          onClick={() => changeRouteOnClick("cart")}
-        >
-          Go to cart
-        </button>
-      ) : isInStock(productId) ? (
-        <button
-          onClick={() => addToCart(productId)}
           className={`btn font-md btn-primary ${styles.btnBig}`}
+          onClick={() => addToCart(productId)}
+          disabled={isLoading}
         >
           Add to cart
         </button>
-      ) : (
-        "Out of stock!"
       )}
       {isLoading && <ToastMsg msg={"Adding to cart..."} />}
     </>
