@@ -5,12 +5,13 @@ import { Navbar } from "./Components";
 import { Products, Cart, WishList, Checkout, ProductPage } from "./Routes";
 import { Routes, Route, useNavigate } from "react-router-dom";
 
+
 export default function App() {
   const { setProductList } = useProduct();
   const { apiCall, response, isLoading } = useAxios();
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     apiCall({
       type: "get",
@@ -28,7 +29,7 @@ export default function App() {
   return (
     <div className="App">
       <Navbar search={search} setSearch={setSearch} />
-
+      
       <Routes>
         <Route
           path="/products"
