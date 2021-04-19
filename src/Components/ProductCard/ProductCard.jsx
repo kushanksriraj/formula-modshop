@@ -1,14 +1,8 @@
 import styles from "./ProductCard.module.css";
-import { WishListButton, CartModifyButtons } from "../";
+import { WishListButton, CartModifyButtons, AddToCartButton } from "../";
 import { useNavigate } from "react-router-dom";
 
-export const ProductCard = ({ 
-    productId,
-    image,
-    name,
-    price,
-    renderedIn }) => {
-
+export const ProductCard = ({ productId, image, name, price, renderedIn }) => {
   const navigate = useNavigate();
 
   return (
@@ -20,7 +14,6 @@ export const ProductCard = ({
 
         <div>
           <div className={styles.title}>{name}</div>
-
           <div className={styles.price}>₹{price}</div>
         </div>
       </div>
@@ -28,7 +21,16 @@ export const ProductCard = ({
       <div className={styles.wishListBtn}>
         <WishListButton productId={productId} />
       </div>
-      {renderedIn === "cart" && <CartModifyButtons productId={productId} />}
+
+      {renderedIn === "cart" ? (
+        <div className={styles.cartModifyBtn}>
+          <CartModifyButtons productId={productId} />
+        </div>
+      ) : (
+        <div className={styles.addToCartBtn}>
+          <AddToCartButton productId={productId} />
+        </div>
+      )}
     </div>
   );
 };

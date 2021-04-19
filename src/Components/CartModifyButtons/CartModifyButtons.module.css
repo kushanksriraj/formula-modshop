@@ -1,14 +1,15 @@
 .cartModifyBtnsWrapper {
-  padding-top: 0.25rem;
+  /* padding-top: 0.8rem; */
   border-top: 1px solid #0000000c;
   display: flex;
   justify-content: space-around;
-  align-items: center;
+  /* align-items: center; */
 }
 
 .decrementBtn {
   width: 20px;
   height: 20px;
+  margin: 0 1rem;
 }
 
 .decrementBtn:focus {
@@ -23,6 +24,7 @@
 .incrementBtn {
   width: 20px;
   height: 20px;
+  margin: 0 1rem;
 }
 
 .incrementBtn:focus {

@@ -10,10 +10,11 @@
   font-weight: bold;
   font-size: 0.9rem;
   cursor: pointer;
+  margin-bottom: 0.3rem;
 }
 
 .price {
-  margin: 0.5rem;
+  margin: 0.3rem;
   font-weight: bold;
 }
 
@@ -35,11 +36,24 @@
 }
 
 .wishListBtn button {
-    position: absolute;
-    border-radius: 50%;
-    right: 0.5rem;
-    top: 0.5rem;
-    border: none;
+  position: absolute;
+  border-radius: 50%;
+  right: 0.5rem;
+  top: 0.5rem;
+  border: none;
+}
+
+.cartModifyBtn {
+  display: grid;
+  place-items: center;
+}
+
+.addToCartBtn {
+  position: absolute;
+  bottom: 0.5rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 @media screen and (max-width: 720px) {
