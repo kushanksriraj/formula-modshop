@@ -14,7 +14,7 @@ export const ProductPage = () => {
   useEffect(() => {
     apiCall({
       type: "get",
-      url: `https://modshop.kushanksriraj.repl.co/cart/${productId}`,
+      url: `https://modshop.kushanksriraj.repl.co/products/${productId}`,
     });
   }, []);
 
