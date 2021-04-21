@@ -5,7 +5,7 @@ import { MinusSvg } from "./MinusSvg";
 import { DeleteSvg } from "./DeleteSvg";
 import { PlusSvg } from "./PlusSvg";
 
-export const CartModifyButtons = ({ productId }) => {
+export const CartModifyButtons = ({ _id }) => {
   const {
     isLoading,
     decrement,
@@ -19,24 +19,24 @@ export const CartModifyButtons = ({ productId }) => {
       <button
         className={`btn-icon ${styles.decrementBtn}`}
         onClick={() => {
-          cartItemQuantity(productId) > 1
-            ? decrement(productId)
-            : removeFromCart(productId);
+          cartItemQuantity(_id) > 1
+            ? decrement(_id)
+            : removeFromCart(_id);
         }}
       >
         <div className="icon" style={{ width: `18px` }}>
-          {cartItemQuantity(productId) > 1 ? (
+          {cartItemQuantity(_id) > 1 ? (
             <MinusSvg />
           ) : (
             <DeleteSvg />
           )}
         </div>
       </button>
-      <div className={styles.itemQty}>{cartItemQuantity(productId)}</div>
+      <div className={styles.itemQty}>{cartItemQuantity(_id)}</div>
 
       <button
         className={`btn-icon ${styles.incrementBtn}`}
-        onClick={() => increment(productId)}
+        onClick={() => increment(_id)}
       >
         <div className="icon" style={{ width: `20px` }}>
           <PlusSvg />

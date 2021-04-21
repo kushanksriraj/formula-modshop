@@ -13,7 +13,7 @@ import mockServer from "./api/mock.server";
 
 import App from "./App";
 
-mockServer();
+// mockServer();
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(

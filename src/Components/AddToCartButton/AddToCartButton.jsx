@@ -3,17 +3,17 @@ import { useCart } from "../../hooks";
 import { ToastMsg } from "../../Components";
 import { GoToCartButton } from "./GoToCartButton";
 
-export const AddToCartButton = ({ productId }) => {
+export const AddToCartButton = ({ _id }) => {
   const { isLoading, addToCart, isAlreadyInCart } = useCart();
 
   return (
     <>
-      {isAlreadyInCart(productId) ? (
+      {isAlreadyInCart(_id) ? (
         <GoToCartButton />
       ) : (
         <button
           className={`btn font-md btn-primary ${styles.btnBig}`}
-          onClick={() => addToCart(productId)}
+          onClick={() => addToCart(_id)}
           disabled={isLoading}
         >
           Add to cart
