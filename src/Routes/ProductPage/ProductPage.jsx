@@ -1,11 +1,10 @@
 import styles from "./ProductPage.module.css";
-import { useProduct, useAxios } from "../../hooks";
+import { useAxios } from "../../hooks";
 import { useParams, useNavigate } from "react-router-dom";
 import { WishListButton, AddToCartButton, ToastMsg } from "../../Components";
 import { useEffect, useState } from "react";
 
 export const ProductPage = () => {
-  // const { getSelectedProduct, isInStock } = useProduct();
   const { productId } = useParams();
   const navigate = useNavigate();
   const { apiCall, response, isLoading } = useAxios();
@@ -19,7 +18,6 @@ export const ProductPage = () => {
   }, []);
 
   useEffect(() => {
-    console.log({ response });
     if (response && response.status === 200) {
       setProductData(response.data.product);
     }

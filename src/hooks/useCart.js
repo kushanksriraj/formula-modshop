@@ -112,8 +112,6 @@ export const useCart = () => {
   };
 
   const cartItemQuantity = (_id) => {
-    console.log({ cartList });
-    console.log({ _id });
     return cartList.find((product) => product.product === _id)?.quantity;
   };
 

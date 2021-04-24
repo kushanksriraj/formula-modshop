@@ -4,16 +4,12 @@ import {
   ControlProvider,
   ProductProvider,
   CartProvider,
-  WishListProvider
+  WishListProvider,
 } from "./contexts";
 
 import { BrowserRouter as Router } from "react-router-dom";
 
-import mockServer from "./api/mock.server";
-
 import App from "./App";
-
-// mockServer();
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(
@@ -23,7 +19,7 @@ ReactDOM.render(
         <CartProvider>
           <WishListProvider>
             <Router>
-            <App />
+              <App />
             </Router>
           </WishListProvider>
         </CartProvider>

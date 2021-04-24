@@ -16,7 +16,6 @@ export const ListWishListProducts = () => {
   }, [wishList]);
 
   useEffect(() => {
-    console.log({ response });
     if (response && response.status === 200) {
       setPopulatedWishList(response.data.wishlist);
     }

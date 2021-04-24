@@ -15,7 +15,6 @@ export const useWishList = () => {
       switch (response.config.method) {
         case "post":
           if (response.status === 201) {
-            // console.log("----****----- ", response.data.wishlist.product);
             dispatch({
               type: "ADD_TO_WISHLIST",
               payload: {
@@ -34,10 +33,6 @@ export const useWishList = () => {
               },
             });
           }
-          break;
-
-        case "get":
-          console.log({ response });
           break;
 
         default:
@@ -68,7 +63,6 @@ export const useWishList = () => {
   };
 
   const isAlreadyInWishList = (_id) => {
-    // console.log({wishList});
     return wishList.some((product) => product.product === _id);
   };
 

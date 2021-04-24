@@ -16,7 +16,6 @@ export const ListCartProducts = () => {
   }, [cartList]);
 
   useEffect(() => {
-    console.log({ response });
     if (response && response.status === 200) {
       setPopulatedCart(response.data.cartlist);
     }

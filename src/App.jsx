@@ -3,13 +3,12 @@ import { useEffect, useState } from "react";
 import { useAxios, useCart, useProduct, useWishList } from "./hooks";
 import { Navbar } from "./Components";
 import { Products, Cart, WishList, Checkout, ProductPage } from "./Routes";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 export default function App() {
   const { setProductList } = useProduct();
   const { apiCall, response, isLoading } = useAxios();
   const [search, setSearch] = useState("");
-  const navigate = useNavigate();
   const { initializeWishList } = useWishList();
   const { initializeCart } = useCart();
 
@@ -18,11 +17,9 @@ export default function App() {
       type: "get",
       url: "https://modshop.kushanksriraj.repl.co/load-data",
     });
-    // navigate("/products");
   }, []);
 
   useEffect(() => {
-    console.log(response);
     if (response && response.status === 200) {
       setProductList(response.data.products);
       initializeWishList(response.data.wishlist);
