@@ -1,15 +1,13 @@
-import { StrictMode } from "react";
 import ReactDOM from "react-dom";
+import { StrictMode } from "react";
+import { BrowserRouter as Router } from "react-router-dom";
+import App from "./App";
 import {
   ControlProvider,
   ProductProvider,
   CartProvider,
   WishListProvider,
 } from "./contexts";
-
-import { BrowserRouter as Router } from "react-router-dom";
-
-import App from "./App";
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(

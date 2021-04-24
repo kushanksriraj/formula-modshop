@@ -2,7 +2,7 @@ import "./styles.css";
 import { useEffect, useState } from "react";
 import { useAxios, useCart, useProduct, useWishList } from "./hooks";
 import { Navbar } from "./Components";
-import { Products, Cart, WishList, Checkout, ProductPage } from "./Routes";
+import { Products, Cart, WishList, Checkout, ProductPage, Home } from "./Routes";
 import { Routes, Route } from "react-router-dom";
 
 export default function App() {
@@ -32,8 +32,10 @@ export default function App() {
       <Navbar search={search} setSearch={setSearch} />
 
       <Routes>
+
+        <Route path="/" element={<Home />} />
         <Route
-          path="/"
+          path="/products"
           element={<Products search={search} isLoading={isLoading} />}
         />
         <Route path="/cart" element={<Cart />} />

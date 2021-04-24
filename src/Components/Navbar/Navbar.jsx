@@ -45,6 +45,10 @@ export const Navbar = ({ search, setSearch }) => {
           HOME
         </button>
 
+        <button className="btn-link" onClick={() => navigate("/products")}>
+          PRODUCTS
+        </button>
+
         {selectSearch && <SearchBar search={search} setSearch={setSearch} />}
 
         <div className={styles.searchButtonWrapper}>
