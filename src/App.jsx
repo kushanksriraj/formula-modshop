@@ -1,47 +1,46 @@
 import "./styles.css";
-import { useEffect, useState } from "react";
-import { useAxios, useCart, useProduct, useWishList } from "./hooks";
-import { Navbar } from "./Components";
-import { Products, Cart, WishList, Checkout, ProductPage, Home } from "./Routes";
+import {
+  Home,
+  Products,
+  ProductInfo,
+  Login,
+  SignUp,
+  WishList,
+  Cart,
+  Profile,
+  Orders,
+  OrderInfo,
+  Checkout,
+  Addresses,
+  Payments,
+} from "./pages";
+
+import { PrivateRoute } from "./utils/PrivateRoute";
 import { Routes, Route } from "react-router-dom";
 
 export default function App() {
-  const { setProductList } = useProduct();
-  const { apiCall, response, isLoading } = useAxios();
-  const [search, setSearch] = useState("");
-  const { initializeWishList } = useWishList();
-  const { initializeCart } = useCart();
-
-  useEffect(() => {
-    apiCall({
-      type: "get",
-      url: "https://modshop.kushanksriraj.repl.co/load-data",
-    });
-  }, []);
-
-  useEffect(() => {
-    if (response && response.status === 200) {
-      setProductList(response.data.products);
-      initializeWishList(response.data.wishlist);
-      initializeCart(response.data.cartlist);
-    }
-  }, [response]);
-
   return (
     <div className="App">
-      <Navbar search={search} setSearch={setSearch} />
-
       <Routes>
+         
+         {/* navbar */}
+         {/* Sidebar */}
 
         <Route path="/" element={<Home />} />
-        <Route
-          path="/products"
-          element={<Products search={search} isLoading={isLoading} />}
-        />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/wishlist" element={<WishList />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/product/:productId" element={<ProductPage />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/product/:id" element={<ProductInfo />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/sign-up" element={<SignUp />} />
+
+        <PrivateRoute path="/wishlist" element={<WishList />} />
+        <PrivateRoute path="/cart" element={<Cart />} />
+        <PrivateRoute path="/profile" element={<Profile />} />
+        <PrivateRoute path="/orders" element={<Orders />} />
+        <PrivateRoute path="/order/:id" element={<OrderInfo />} />
+        <PrivateRoute path="/checkout" element={<Checkout />} />
+        <PrivateRoute path="/addresses" element={<Addresses />} />
+        <PrivateRoute path="/payments" element={<Payments />} />
+
       </Routes>
     </div>
   );

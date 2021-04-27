@@ -1,3 +1,2 @@
-export { controlReducer } from "./control-reducer";
-export { cartReducer } from "./cart-reducer";
-export { wishListReducer } from "./wishList-reducer";
+export { userReducer } from "./userReducer";
+export { productReducer } from "./productReducer";
