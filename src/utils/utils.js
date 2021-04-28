@@ -1,0 +1,1 @@
+export const BASE_URL = "https://modshop-v2.kushanksriraj.repl.co";

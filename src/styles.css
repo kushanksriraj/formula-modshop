@@ -3,6 +3,6 @@
 
 .App {
   height: 100vh;
-  display: grid;
-  grid-template-rows: 100px auto;
+  /* display: grid; */
+  /* grid-template-rows: 100px auto; */
 }
