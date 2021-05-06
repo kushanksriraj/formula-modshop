@@ -1,6 +1,6 @@
 import "./styles.css";
 import { useEffect, useState } from "react";
-import { useAxios, useProduct } from "./hooks";
+import { useAxios, useCart, useProduct, useWishList } from "./hooks";
 import { Navbar } from "./Components";
 import { Products, Cart, WishList, Checkout, ProductPage } from "./Routes";
 import { Routes, Route, useNavigate } from "react-router-dom";
@@ -10,18 +10,23 @@ export default function App() {
   const { apiCall, response, isLoading } = useAxios();
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
+  const { initializeWishList } = useWishList();
+  const { initializeCart } = useCart();
 
   useEffect(() => {
     apiCall({
       type: "get",
-      url: "/api/product-list"
+      url: "https://modshop.kushanksriraj.repl.co/load-data",
     });
-    navigate("/products");
+    // navigate("/products");
   }, []);
 
   useEffect(() => {
+    console.log(response);
     if (response && response.status === 200) {
-      setProductList(response.data.productLists);
+      setProductList(response.data.products);
+      initializeWishList(response.data.wishlist);
+      initializeCart(response.data.cartlist);
     }
   }, [response]);
 
@@ -31,13 +36,13 @@ export default function App() {
 
       <Routes>
         <Route
-          path="/products"
+          path="/"
           element={<Products search={search} isLoading={isLoading} />}
         />
         <Route path="/cart" element={<Cart />} />
         <Route path="/wishlist" element={<WishList />} />
         <Route path="/checkout" element={<Checkout />} />
-        <Route path="product/:productId" element={<ProductPage />} />
+        <Route path="/product/:productId" element={<ProductPage />} />
       </Routes>
     </div>
   );

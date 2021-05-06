@@ -41,7 +41,7 @@ export const Navbar = ({ search, setSearch }) => {
       </div>
 
       <div className={styles.navigationBelow}>
-        <button className="btn-link" onClick={() => navigate("/products")}>
+        <button className="btn-link" onClick={() => navigate("/")}>
           HOME
         </button>
 

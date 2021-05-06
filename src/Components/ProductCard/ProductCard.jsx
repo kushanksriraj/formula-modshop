@@ -2,14 +2,14 @@ import styles from "./ProductCard.module.css";
 import { WishListButton, CartModifyButtons, AddToCartButton } from "../";
 import { useNavigate } from "react-router-dom";
 
-export const ProductCard = ({ productId, image, name, price, renderedIn }) => {
+export const ProductCard = ({ _id, imageUrl, name, price, renderedIn }) => {
   const navigate = useNavigate();
 
   return (
     <div className={styles.productCard}>
-      <div onClick={() => navigate(`/product/${productId}`)}>
+      <div onClick={() => navigate(`/product/${_id}`)}>
         <div className={styles.image}>
-          <img className="img-responsive" src={image} alt={name} />
+          <img className="img-responsive" src={imageUrl} alt={name} />
         </div>
 
         <div>
@@ -19,16 +19,16 @@ export const ProductCard = ({ productId, image, name, price, renderedIn }) => {
       </div>
 
       <div className={styles.wishListBtn}>
-        <WishListButton productId={productId} />
+        <WishListButton _id={_id} />
       </div>
 
       {renderedIn === "cart" ? (
         <div className={styles.cartModifyBtn}>
-          <CartModifyButtons productId={productId} />
+          <CartModifyButtons _id={_id} />
         </div>
       ) : (
         <div className={styles.addToCartBtn}>
-          <AddToCartButton productId={productId} />
+          <AddToCartButton _id={_id} />
         </div>
       )}
     </div>

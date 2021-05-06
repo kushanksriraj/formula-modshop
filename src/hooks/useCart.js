@@ -1,15 +1,12 @@
 import { CartContext } from "../contexts/";
 import { useContext, useEffect } from "react";
-import { useProduct } from "../hooks";
 import { useAxios } from "../hooks/useAxios";
 
 export const useCart = () => {
   const {
     state: { cartList },
-    dispatch
+    dispatch,
   } = useContext(CartContext);
-
-  const { productList } = useProduct();
 
   const { apiCall, response, isError, isLoading } = useAxios();
 
@@ -21,8 +18,16 @@ export const useCart = () => {
             dispatch({
               type: "ADD_TO_CART",
               payload: {
-                product: response.data.cartList
-              }
+                product: response.data.cartlist,
+              },
+            });
+          } else if (response.status === 200) {
+            dispatch({
+              type: "MODIFY_CART_QTY",
+              payload: {
+                productId: response.data.updated._id,
+                quantity: response.data.updated.quantity,
+              },
             });
           }
           break;
@@ -32,23 +37,11 @@ export const useCart = () => {
             dispatch({
               type: "REMOVE_FROM_CART",
               payload: {
-                productId: response.data
-              }
+                productId: response.data.deleted.product,
+              },
             });
           }
 
-          break;
-
-        case "patch":
-          if (response.status === 200) {
-            dispatch({
-              type: "MODIFY_CART_QTY",
-              payload: {
-                productId: response.data.cartList.productId,
-                quantity: response.data.cartList.quantity
-              }
-            });
-          }
           break;
 
         case "get":
@@ -60,82 +53,77 @@ export const useCart = () => {
     }
   }, [response]);
 
-  const addToCart = (productId) => {
-    const product = productList.filter(
-      (product) => product.productId === productId
-    )[0];
+  const addToCart = (_id) => {
+    apiCall({
+      type: "post",
+      url: "https://modshop.kushanksriraj.repl.co/cart/",
+      body: {
+        _id,
+      },
+    });
+  };
 
-    const { id, ...productNoId } = product;
+  const removeFromCart = (_id) => {
+    apiCall({
+      type: "delete",
+      url: `https://modshop.kushanksriraj.repl.co/cart/${_id}`,
+    });
+  };
+
+  const decrement = (_id) => {
+    const prevQty = cartList.find((product) => product.product === _id)
+      .quantity;
 
     apiCall({
       type: "post",
-      url: "/api/cart-list",
+      url: `https://modshop.kushanksriraj.repl.co/cart/${_id}`,
       body: {
-        product: {
-          ...productNoId,
-          quantity: 1
-        }
-      }
+        quantity: prevQty - 1,
+      },
     });
   };
 
-  const removeFromCart = (productId) => {
-    apiCall({
-      type: "delete",
-      url: `/api/cart-list/${productId}`
-    });
-  };
-
-  const decrement = (productId) => {
-    const prevQty = cartList.filter(
-      (product) => product.productId === productId
-    )[0].quantity;
+  const increment = (_id) => {
+    const prevQty = cartList.find((product) => product.product === _id)
+      .quantity;
 
     apiCall({
-      type: "patch",
-      url: `/api/cart-list/${productId}`,
+      type: "post",
+      url: `https://modshop.kushanksriraj.repl.co/cart/${_id}`,
       body: {
-        product: {
-          quantity: prevQty - 1
-        }
-      }
+        quantity: prevQty + 1,
+      },
     });
   };
 
-  const increment = (productId) => {
-    const prevQty = cartList.filter(
-      (product) => product.productId === productId
-    )[0].quantity;
-
-    apiCall({
-      type: "patch",
-      url: `/api/cart-list/${productId}`,
-      body: {
-        product: {
-          quantity: prevQty + 1
-        }
-      }
-    });
-  };
-
-  const isAlreadyInCart = (productId) => {
-    return cartList.some((product) => product.productId === productId);
+  const isAlreadyInCart = (_id) => {
+    return cartList.some((product) => product.product === _id);
   };
 
   const totalCartItems = () => {
     return cartList.length;
   };
 
-  const totalCartPrice = () => {
-    return cartList.reduce(
-      (acc, { price, quantity }) => acc + price * quantity,
+  const totalCartPrice = (list) => {
+    return list.reduce(
+      (acc, { product, quantity }) => acc + product.price * quantity,
       0
     );
   };
 
-  const cartItemQuantity = (productId) => {
-    return cartList.filter((product) => product.productId === productId)[0]
-      .quantity;
+  const cartItemQuantity = (_id) => {
+    console.log({ cartList });
+    console.log({ _id });
+    return cartList.find((product) => product.product === _id)?.quantity;
+  };
+
+  const initializeCart = (list) => {
+    dispatch({
+      type: "INITIALIZE",
+      payload: {
+        list,
+      },
+    });
   };
 
   return {
@@ -150,6 +138,7 @@ export const useCart = () => {
     cartItemQuantity,
     addToCart,
     removeFromCart,
-    dispatch
+    dispatch,
+    initializeCart,
   };
 };

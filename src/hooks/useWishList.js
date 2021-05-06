@@ -1,15 +1,12 @@
 import { WishListContext } from "../contexts";
 import { useContext, useEffect } from "react";
-import { useProduct } from "../hooks";
 import { useAxios } from "../hooks/useAxios";
 
 export const useWishList = () => {
   const {
     state: { wishList },
-    dispatch
+    dispatch,
   } = useContext(WishListContext);
-
-  const { productList } = useProduct();
 
   const { apiCall, response, isError, isLoading } = useAxios();
 
@@ -18,11 +15,12 @@ export const useWishList = () => {
       switch (response.config.method) {
         case "post":
           if (response.status === 201) {
+            // console.log("----****----- ", response.data.wishlist.product);
             dispatch({
               type: "ADD_TO_WISHLIST",
               payload: {
-                product: response.data.wishList
-              }
+                productId: response.data.wishlist.product,
+              },
             });
           }
           break;
@@ -32,8 +30,8 @@ export const useWishList = () => {
             dispatch({
               type: "REMOVE_FROM_WISHLIST",
               payload: {
-                productId: response.data
-              }
+                productId: response.data.deleted.product,
+              },
             });
           }
           break;
@@ -52,30 +50,37 @@ export const useWishList = () => {
     return wishList.length;
   };
 
-  const addToWishList = (productId) => {
-    const product = productList.filter((product) => product.productId === productId)[0];
-
-    const {id, ...productNoId} = product;
-
+  const addToWishList = (_id) => {
     apiCall({
       type: "post",
-      url: "/api/wish-list",
+      url: "https://modshop.kushanksriraj.repl.co/wish-list/",
       body: {
-        product: { ...productNoId }
-      }
+        _id,
+      },
     });
   };
 
-  const removeFromWishList = (productId) => {
+  const removeFromWishList = (_id) => {
     apiCall({
       type: "delete",
-      url: `/api/wish-list/${productId}`
+      url: `https://modshop.kushanksriraj.repl.co/wish-list/${_id}`,
     });
   };
 
-  const isAlreadyInWishList = (productId) => {
-    return wishList.some((product) => product.productId === productId);
+  const isAlreadyInWishList = (_id) => {
+    // console.log({wishList});
+    return wishList.some((product) => product.product === _id);
   };
+
+
+  const initializeWishList = (list) => {
+   dispatch({
+     type: "INITIALIZE",
+     payload : {
+       list
+     }
+   });
+  }
 
   return {
     wishList,
@@ -85,6 +90,7 @@ export const useWishList = () => {
     removeFromWishList,
     dispatch,
     totalItemsInWishList,
-    isAlreadyInWishList
+    isAlreadyInWishList,
+    initializeWishList
   };
 };

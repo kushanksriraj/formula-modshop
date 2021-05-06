@@ -4,7 +4,7 @@ import styles from "./WishListButton.module.css";
 import { RedHeartSvg } from "./RedHeartSvg";
 import { BlackHeartSvg } from "./BlackHeartSvg";
 
-export const WishListButton = ({ productId }) => {
+export const WishListButton = ({ _id }) => {
   const {
     isLoading,
     isAlreadyInWishList,
@@ -17,14 +17,14 @@ export const WishListButton = ({ productId }) => {
       <button
         className={styles.likeBtn}
         onClick={() => {
-          isAlreadyInWishList(productId)
-            ? removeFromWishList(productId)
-            : addToWishList(productId);
+          isAlreadyInWishList(_id)
+            ? removeFromWishList(_id)
+            : addToWishList(_id);
         }}
         disabled={isLoading ? true : false}
       >
         <div className="icon">
-          {isAlreadyInWishList(productId) ? <RedHeartSvg /> : <BlackHeartSvg />}
+          {isAlreadyInWishList(_id) ? <RedHeartSvg /> : <BlackHeartSvg />}
         </div>
       </button>
       {isLoading && <ToastMsg msg={"Updating wishlist..."} />}
