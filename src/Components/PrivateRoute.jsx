@@ -2,14 +2,21 @@ import { Navigate, Route, useLocation } from "react-router-dom";
 import { useAuth } from "../hooks";
 
 export const PrivateRoute = (props) => {
-  const { isUserLoggedIn } = useAuth();
+  const { isUserLoggedIn, loading } = useAuth();
   const location = useLocation();
+
   return (
     <>
-      {isUserLoggedIn ? (
-        <Route {...props} />
+      {loading ? (
+        <span>Loading...</span>
       ) : (
-        <Navigate to="/login" state={{ from: location.pathname }} replace />
+        <>
+          {isUserLoggedIn ? (
+            <Route {...props} />
+          ) : (
+            <Navigate to="/login" state={{ from: location.pathname }} replace />
+          )}
+        </>
       )}
     </>
   );

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { useAuth } from "../../hooks";
 
@@ -9,17 +9,25 @@ export const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const path = location.state?.from;
 
+  const message = location.state?.message;
+
   return (
-    <div>
+    <div className="top-margin">
       <h2>This is login page</h2>
 
       {path && (
-        <h1>
+        <h3>
           Login to continue to {path.slice(1)[0].toUpperCase() + path.slice(2)}
-        </h1>
+        </h3>
       )}
+
+      {message && <h1>{message}</h1>}
 
       {!isUserLoggedIn ? (
         <div>

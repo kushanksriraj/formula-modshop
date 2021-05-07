@@ -1,24 +1,22 @@
 import { AuthContext } from "../contexts";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import axios from "axios";
 import { BASE_URL } from "../utils/utils";
 import { useNavigate } from "react-router";
+import { useUserData } from "./useUserData";
 
 export const useAuth = () => {
   const {
     isUserLoggedIn,
     setIsUserLoggedIn,
     setUserData,
-    userData,
+    userProfile,
+    loading,
+    setLoading
   } = useContext(AuthContext);
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    (async () => {
-      await localStorage.setItem("login", isUserLoggedIn);
-    })();
-  }, [isUserLoggedIn]);
+  const { userDispatch } = useUserData();
 
   const logUserIn = async (email, password, redirectPath) => {
     const response = await axios.post(`${BASE_URL}/user`, {
@@ -55,8 +53,21 @@ export const useAuth = () => {
 
   const logUserOut = () => {
     setIsUserLoggedIn(false);
+    userDispatch({
+      type: "FLUSH_DATA",
+    });
     setUserData({});
   };
 
-  return { isUserLoggedIn, logUserIn, logUserOut, signUpUser, userData };
+  return {
+    isUserLoggedIn,
+    logUserIn,
+    logUserOut,
+    signUpUser,
+    userProfile,
+    setIsUserLoggedIn,
+    setUserData,
+    loading, 
+    setLoading
+  };
 };

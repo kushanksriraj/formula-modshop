@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../../hooks";
 
 export const SignUp = () => {
@@ -7,8 +7,12 @@ export const SignUp = () => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <div>
+    <div className="top-margin">
       <h2>This is Sign up page</h2>
 
       <h2>Sign up</h2>
