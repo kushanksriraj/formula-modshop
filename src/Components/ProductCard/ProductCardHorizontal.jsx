@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useAuth, useUserData } from "../../hooks";
 import axios from "axios";
 import { BASE_URL } from "../../utils/utils";
