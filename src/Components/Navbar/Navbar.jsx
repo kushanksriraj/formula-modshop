@@ -2,11 +2,12 @@ import { useNavigate } from "react-router-dom";
 import { useAuth, useUserData } from "../../hooks";
 
 export const Navbar = () => {
-  const { isUserLoggedIn, logUserOut } = useAuth();
+  const { isUserLoggedIn } = useAuth();
   const navigate = useNavigate();
   const {
     userData: { wishList, cartList },
   } = useUserData();
+
   return (
     <div className="bg-color-1 navbar-h pos-fix top w-100 z-bg flex align-center">
       <header className="color-2 text-bold font-7 p-3 flex space-between w-100">
@@ -50,9 +51,11 @@ export const Navbar = () => {
           {isUserLoggedIn ? (
             <button
               className="btn bg-inherit p-h-2"
-              onClick={() => logUserOut()}
+              onClick={() => navigate("/profile")}
             >
-              <span className="material-icons-round color-2">logout</span>
+              <span className="material-icons-round color-2 font-7">
+                account_circle
+              </span>
             </button>
           ) : (
             <button

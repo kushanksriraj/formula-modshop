@@ -32,6 +32,7 @@ export const ToggleWishList = ({ _id }) => {
     }
     navigate("/login", {
       state: {
+        from: location.pathname + location.search,
         message: "Login to add to wishlist.",
         addTo: "WISHLIST",
         productId: _id,

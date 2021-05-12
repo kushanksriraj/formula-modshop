@@ -121,7 +121,7 @@ export const ProductCardHorizontal = ({ product }) => {
           <div>Quantity: </div>
           <button
             disabled={product.quantity === 1}
-            className="btn bg-inherit"
+            className="btn bg-inherit btn-decrease"
             onClick={() =>
               decrementQuantity(product.product._id, product.quantity)
             }

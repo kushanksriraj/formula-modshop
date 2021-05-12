@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import { useAuth, useUserData } from "../../hooks";
 import { BASE_URL } from "../../utils/utils";
 
-export const AddToCart = ({ _id }) => {
+export const AddToCart = ({ _id, inStock }) => {
   const { userProfile, isUserLoggedIn } = useAuth();
   const { userData, userDispatch } = useUserData();
   const [loading, setLoading] = useState(false);
@@ -33,6 +33,7 @@ export const AddToCart = ({ _id }) => {
 
     navigate("/login", {
       state: {
+        from: location.pathname + location.search,
         message: "Login to add to cart.",
         addTo: "CART",
         productId: _id,
@@ -44,20 +45,23 @@ export const AddToCart = ({ _id }) => {
     userData.cartList.some(({ product }) => product === _id);
 
   return (
-    <div>
+    <>
       {isAlreadyInCart(_id) ? (
-        <button onClick={() => navigate("/cart")}  
-        className="btn btn-small bg-color-1 color-2 text-bold font-3 p-h-2 border-round-small"
-        >Goto cart</button>
+        <button
+          onClick={() => navigate("/cart")}
+          className="btn bg-color-1 color-2 text-bold font-4 p-3 w-100 m-h-2"
+        >
+          GO TO CART
+        </button>
       ) : (
         <button
-          disabled={loading}
+          disabled={loading || !inStock}
           onClick={() => addToCartOnClick(_id)}
-          className="btn btn-small bg-color-3 color-2 text-bold font-3 p-h-2 border-round-small"
+          className="btn bg-color-3 color-2 text-bold font-4 p-3 w-100 m-h-2"
         >
-          Add to cart
+          ADD TO CART
         </button>
       )}
-    </div>
+    </>
   );
 };

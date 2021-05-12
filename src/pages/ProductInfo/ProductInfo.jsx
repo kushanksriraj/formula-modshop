@@ -13,6 +13,8 @@ export const ProductInfo = () => {
   const { userData, userDispatch } = useUserData();
   const { userProfile, isUserLoggedIn } = useAuth();
 
+  const inStock = product?.stock > 0;
+
   useEffect(() => {
     window.scrollTo(0, 0);
     (async () => {
@@ -123,6 +125,10 @@ export const ProductInfo = () => {
             Discounted price:
             <span className="text-bold font-5"> ₹{product.price}</span>
           </div>
+          
+          {!inStock && 
+          <div className="m-4 text-bold">Out of stock!</div>
+          }
           <div className="flex space-around w-7 m-v-4">
             {isAlreadyInWishList(product._id) ? (
               <button
@@ -150,12 +156,14 @@ export const ProductInfo = () => {
             ) : (
               <button
                 onClick={() => addToCartOnClick(product._id)}
+                disabled={!inStock}
                 className="btn btn-md p-3 bg-color-3 color-2 text-bold"
               >
                 ADD TO CART
               </button>
             )}
           </div>
+
 
           <div className="heading-3 product-description">Description</div>
           <div className="p-4 font-5">{product.description}</div>

@@ -1,30 +1,29 @@
 import { useState } from "react";
+import { categoryList } from "../../utils/utils";
+import { CheckBox } from "./CheckBox";
+import { SortBox } from "./SortBox";
 
 export const MobileFilters = ({
-  filterBy,
-  clearSortOnClick,
-  setSortOnClick,
-  setFilterOnClick,
-  clearFilterOnClick,
+  deleteSearchParamList,
+  replaceSearchParams,
+  categoryFilterList,
+  sort,
+  stockFilter,
+  deliveryFilter,
+  setCheckBoxCatergory,
+  setCheckBoxFilter,
 }) => {
   const [showFilter, setShowFilter] = useState(false);
+
   return (
     <div className="option-box-mobile pos-rel">
       <div className="tab border-1 flex space-around justify-center align-center p-2">
         <div className="text-bold">Sort by</div>
-
-        <select
-          className="text-bold bg-color-1 color-2 p-1 border-round-small"
-          onChange={(e) => {
-            e.target.value === "RELEVANCE"
-              ? clearSortOnClick()
-              : setSortOnClick(e.target.value);
-          }}
-        >
-          <option value="RELEVANCE">Relevance</option>
-          <option value="LOW_TO_HIGH">Low to high</option>
-          <option value="HIGH_TO_LOW">High to low</option>
-        </select>
+        <SortBox
+          sort={sort}
+          deleteSearchParamList={deleteSearchParamList}
+          replaceSearchParams={replaceSearchParams}
+        />
       </div>
 
       <div
@@ -48,129 +47,44 @@ export const MobileFilters = ({
         <div className="m-h-2 m-v-3 border-1">
           <div className="flex wrap">
             <div className="m-1">
-              <input
-                type="checkbox"
-                id="assured-delivery"
-                onChange={(e) =>
-                  e.target.checked && setFilterOnClick("Assured delivery")
+              <CheckBox
+                isChecked={deliveryFilter === "ASSURED_DELIVERY"}
+                label="Assured delivery"
+                callback={(e) =>
+                  setCheckBoxFilter(e, "delivery", "ASSURED_DELIVERY")
                 }
-                checked={filterBy === "Assured delivery"}
               />
-              <label htmlFor="assured-delivery" className="cur-point m-h-1">
-                Assured delivery
-              </label>
             </div>
             <div className="m-1">
-              <input
-                type="checkbox"
-                id="out-of-stock"
-                onChange={(e) =>
-                  e.target.checked && setFilterOnClick("Out of stock")
-                }
-                checked={filterBy === "Out of stock"}
+              <CheckBox
+                isChecked={stockFilter === "OUT_OF_STOCK"}
+                label="Include out of stock"
+                callback={(e) => setCheckBoxFilter(e, "stock", "OUT_OF_STOCK")}
               />
-              <label htmlFor="out-of-stock" className="cur-point m-h-1">
-                Out of stock
-              </label>
             </div>
           </div>
 
           <div className="separator m-v-4" />
           <div className="text-bold m-1 m-v-2 font-3">Filter by type</div>
           <div className="flex wrap">
-            <div className="m-2">
-              <input
-                type="checkbox"
-                id="caps"
-                onChange={(e) => e.target.checked && setFilterOnClick("Caps")}
-                checked={filterBy === "Caps"}
-              />
-              <label htmlFor="caps" className="cur-point m-h-1">
-                Caps
-              </label>
-            </div>
-            <div className="m-2">
-              <input
-                type="checkbox"
-                id="hoodie"
-                onChange={(e) => e.target.checked && setFilterOnClick("Hoodie")}
-                checked={filterBy === "Hoodie"}
-              />
-              <label htmlFor="hoodie" className="cur-point m-h-1">
-                Hoodie
-              </label>
-            </div>
-            <div className="m-2">
-              <input
-                type="checkbox"
-                id="t-shirt"
-                onChange={(e) =>
-                  e.target.checked && setFilterOnClick("T-Shirt")
-                }
-                checked={filterBy === "T-Shirt"}
-              />
-              <label htmlFor="t-shirt" className="cur-point m-h-1">
-                T-Shirt
-              </label>
-            </div>
-            <div className="m-2">
-              <input
-                type="checkbox"
-                id="model-car"
-                onChange={(e) =>
-                  e.target.checked && setFilterOnClick("Model car")
-                }
-                checked={filterBy === "Model car"}
-              />
-              <label htmlFor="model-car" className="cur-point m-h-1">
-                Model car
-              </label>
-            </div>
-            <div className="m-2">
-              <input
-                type="checkbox"
-                id="backpack"
-                onChange={(e) =>
-                  e.target.checked && setFilterOnClick("Backpack")
-                }
-                checked={filterBy === "Backpack"}
-              />
-              <label htmlFor="backpack" className="cur-point m-h-1">
-                Backpack
-              </label>
-            </div>
-            <div className="m-2">
-              <input
-                type="checkbox"
-                id="keyring"
-                onChange={(e) =>
-                  e.target.checked && setFilterOnClick("Keyring")
-                }
-                checked={filterBy === "Keyring"}
-              />
-              <label htmlFor="keyring" className="cur-point m-h-1">
-                Keyring
-              </label>
-            </div>
-            <div className="m-2">
-              <input
-                type="checkbox"
-                id="iphone-case"
-                onChange={(e) =>
-                  e.target.checked && setFilterOnClick("iPhone case")
-                }
-                checked={filterBy === "iPhone case"}
-              />
-              <label htmlFor="iphone-case" className="cur-point m-h-1">
-                iPhone case
-              </label>
-            </div>
+            {categoryList.map(({ name }) => {
+              return (
+                <div key={name} className="m-2">
+                  <CheckBox
+                    isChecked={categoryFilterList.some((list) => list === name)}
+                    label={name}
+                    callback={(e) => setCheckBoxCatergory(e, "category", name)}
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
         <button
           onClick={() => {
-            clearFilterOnClick();
-            setShowFilter(false);
+            deleteSearchParamList({ name: "category" });
+            deleteSearchParamList({ name: "stock" });
+            deleteSearchParamList({ name: "delivery" });
           }}
           className="btn btn-small bg-color-1 color-2 text-bold p-h-2 border-round-small m-h-4"
         >
