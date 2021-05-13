@@ -5,3 +5,4 @@ export { AddToCart } from "./AddToCart/AddToCart";
 export { ToggleWishList } from "./ToggleWishList/ToggleWishList";
 export { Navbar } from "./Navbar/Navbar";
 export { Loading } from "./Loading/Loading";
+export { InputBox } from "./InputBox";

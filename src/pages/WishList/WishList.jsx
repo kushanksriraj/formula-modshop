@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Loading, ProductCard } from "../../Components";
-import { useAuth, useUserData } from "../../hooks";
+import { useAuth, useScrollToTop, useUserData } from "../../hooks";
 import { BASE_URL } from "../../utils/utils";
 
 export const WishList = () => {
@@ -9,9 +9,9 @@ export const WishList = () => {
   const [wishList, setWishList] = useState([]);
   const [loading, setLoading] = useState(false);
   const { userData } = useUserData();
+  useScrollToTop();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     (async () => {
       setLoading(true);
       const response = await axios.get(
@@ -25,8 +25,8 @@ export const WishList = () => {
   return (
     <>
       {loading && <Loading />}
-      <div className="top-margin m-h-auto" style={{ maxWidth: "80rem" }}>
-        <header className="heading-2 top-padding m-2">Your wishlist</header>
+      <div className="top-margin m-h-auto max-width-md">
+        <header className="heading-2 p-t-8 m-2">Your wishlist</header>
         {wishList.length > 0 ? (
           <div className="product-list">
             {wishList.map((product) => {
@@ -36,7 +36,7 @@ export const WishList = () => {
         ) : (
           <>
             {!loading && (
-              <div className="flex justify-center align-center font-6 color-6 text-bold h-8">
+              <div className="flex place-center font-6 color-6 text-bold h-8">
                 No products in wishlist!
               </div>
             )}

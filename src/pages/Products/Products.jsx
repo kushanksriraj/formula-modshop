@@ -16,11 +16,12 @@ export const Products = () => {
   const { productList, setProductList } = useProductData();
   const [searchParams] = useSearchParams();
   const [loading, setLoading] = useState(false);
+
   const {
-    deleteOneSearchParam,
     deleteSearchParamList,
-    appendSearchParams,
     replaceSearchParams,
+    setCheckBoxCatergory,
+    setCheckBoxFilter,
   } = useQueryParams(searchParams);
 
   useScrollToTop();
@@ -39,18 +40,6 @@ export const Products = () => {
   const stockFilter = searchParams.get("stock") || "";
   const deliveryFilter = searchParams.get("delivery") || "";
 
-  const setCheckBoxCatergory = (e, name, value) => {
-    e.target.checked
-      ? appendSearchParams({ name, value })
-      : deleteOneSearchParam({ name, value });
-  };
-
-  const setCheckBoxFilter = (e, name, value) => {
-    e.target.checked
-      ? appendSearchParams({ name, value })
-      : deleteSearchParamList({ name });
-  };
-
   const transFormedProductList = getTransformedProducts({
     productList,
     categoryFilterList,
@@ -62,7 +51,7 @@ export const Products = () => {
   return (
     <div className="productWrapper">
       <div className="option-box">
-        <div style={{ marginRight: "4rem" }}>
+        <div className="right-margin">
           <span className="text-bold m-h-2">Sort by</span>
           <SortBox
             sort={sort}
@@ -129,14 +118,11 @@ export const Products = () => {
       </div>
 
       <MobileFilters
-        deleteSearchParamList={deleteSearchParamList}
-        replaceSearchParams={replaceSearchParams}
         categoryFilterList={categoryFilterList}
         sort={sort}
         stockFilter={stockFilter}
         deliveryFilter={deliveryFilter}
-        setCheckBoxCatergory={setCheckBoxCatergory}
-        setCheckBoxFilter={setCheckBoxFilter}
+        searchParams={searchParams}
       />
 
       <div className="product-list pos-rel">
@@ -145,7 +131,7 @@ export const Products = () => {
         })}
 
         {transFormedProductList.length === 0 && !loading && (
-          <div className="pos-abs flex align-center justify-center text-bold font-6 color-6 m-8 p-8 prompt-mobile">
+          <div className="pos-abs flex place-center text-bold font-6 color-6 m-8 p-8 prompt-mobile">
             No matching products found!
           </div>
         )}

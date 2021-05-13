@@ -48,10 +48,24 @@ export const useQueryParams = (searchParams) => {
     }
   };
 
+  const setCheckBoxCatergory = (e, name, value) => {
+    e.target.checked
+      ? appendSearchParams({ name, value })
+      : deleteOneSearchParam({ name, value });
+  };
+
+  const setCheckBoxFilter = (e, name, value) => {
+    e.target.checked
+      ? appendSearchParams({ name, value })
+      : deleteSearchParamList({ name });
+  };
+
   return {
     deleteSearchParamList,
     deleteOneSearchParam,
     appendSearchParams,
     replaceSearchParams,
+    setCheckBoxCatergory,
+    setCheckBoxFilter,
   };
 };

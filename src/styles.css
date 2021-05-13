@@ -15,63 +15,16 @@ button:disabled {
   margin-top: 4.5rem;
 }
 
-.top-padding {
+.right-margin {
+  margin-right: 4rem;
+}
+
+.p-t-8 {
   padding-top: 2rem;
-}
-
-.z-sm {
-  z-index: 1;
-}
-
-.z-md {
-  z-index: 2;
-}
-
-.z-bg {
-  z-index: 3;
-}
-
-.border-0 {
-  border: none;
-}
-
-.product-name {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-}
-
-.product-name-h {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-}
-
-.product-name-h-2 {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-}
-
-.bg-color-white {
-  background-color: white;
 }
 
 .badge {
   right: -0.4rem;
-}
-
-.m-h-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.m-v-auto {
-  margin-top: auto;
-  margin-bottom: auto;
 }
 
 .max-width-md {
@@ -98,44 +51,25 @@ button:disabled {
   padding-bottom: 0.75rem;
 }
 
-.list-grid {
-  display: grid;
-  grid-template-columns: 2.5fr 1fr 1fr;
-  text-align: center;
-}
-
 .font-big {
   font-size: 6rem;
-}
-
-.text-left {
-  text-align: left;
-}
-/* margin left, right, up, down classes. Also, put the margin classes at last so they don't get overridden */
-/* Maybe modify width and height values, as they seem not that useful */
-/* border-red-debug */
-
-.border-debug {
-  border: 1px solid red;
 }
 
 .height-sm {
   height: 1rem;
 }
 
-.h-fit {
-  height: fit-content;
+.icon:disabled {
+  background-color: inherit;
 }
 
-.w-fit {
-  width: fit-content;
+.blur {
+  filter: opacity(20%);
 }
 
-.flex-end {
-  justify-content: flex-end;
+.hov:hover img {
+  filter: opacity(80%);
 }
-
-/* ------------------------------ */
 
 .spin {
   animation-name: spin;
@@ -153,16 +87,54 @@ button:disabled {
   }
 }
 
+.list-grid {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr 1fr;
+  text-align: center;
+}
+
+.product-name {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.product-name-h {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.product-name-h-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.product-list {
+  display: grid;
+  background-color: var(--color-2);
+}
+.product-card {
+  background-color: white;
+}
+
+.product-img-wrapper {
+  height: 100%;
+  border-right: 1px solid var(--color-7);
+}
+
 @media screen and (min-width: 721px) {
   .product-list {
     margin-top: 4rem;
     width: 100%;
     margin-left: auto;
     padding: 2rem;
-    display: grid;
     grid-template-columns: repeat(auto-fill, minmax(15.625rem, 1fr));
     grid-gap: 1rem;
-    background-color: var(--color-2);
   }
 
   .option-box {
@@ -187,7 +159,6 @@ button:disabled {
   .product-card {
     max-width: 18rem;
     height: 26rem;
-    background-color: white;
   }
 
   .product-card-h {
@@ -204,18 +175,12 @@ button:disabled {
     height: 75vh;
   }
 
-  .cart-list > div {
-    margin-bottom: 2rem;
-  }
-
   .product-detail-wrapper {
     max-width: 80rem;
   }
 
   .product-img-wrapper {
     min-width: 40rem;
-    height: 100%;
-    border-right: 1px solid var(--color-7);
   }
   .product-description {
     padding-top: 6rem;
@@ -231,12 +196,10 @@ button:disabled {
   .product-list {
     max-width: 50rem;
     margin: auto;
-    display: grid;
     grid-gap: 0.2rem;
     grid-template-columns: 1fr 1fr;
     padding: 0.5rem 0.2rem;
     place-items: center;
-    background-color: var(--color-2);
   }
   .option-box {
     display: none;
@@ -251,7 +214,6 @@ button:disabled {
   .product-card {
     max-width: 15.625rem;
     height: 20rem;
-    background-color: white;
     cursor: default;
   }
 
@@ -269,52 +231,25 @@ button:disabled {
     width: auto;
   }
 
-  .cart-list-mobile {
-    flex-direction: column;
-  }
-
-  .cart-list-mobile .cart-list {
-    margin: 0.5rem;
-  }
-
   .product-detail-wrapper {
     margin-top: 4.5rem;
     flex-direction: column;
   }
 
   .product-img-wrapper {
-    height: 100%;
     padding-top: 8rem;
-    border-right: 1px solid var(--color-7);
   }
 
   .product-description {
     padding-top: 2rem;
   }
-  
+
   .prompt-mobile {
     margin-top: 8rem;
     font-size: 1.2rem;
   }
-}
 
-.cart-list {
-  display: flex;
-  flex-direction: column;
-  background-color: inherit;
-  place-items: initial;
-  margin-top: 4rem;
-  margin-left: 4rem;
-}
-
-.btn-decrease:disabled {
-  background-color: inherit;
-}
-
-.blur {
-  filter: opacity(20%);
-}
-
-.hov:hover img {
-  filter: opacity(80%);
+  .cart-mobile {
+    flex-direction: column;
+  }
 }

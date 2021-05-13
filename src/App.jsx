@@ -13,6 +13,7 @@ import {
   Checkout,
   Addresses,
   Payments,
+  NotFound,
 } from "./pages";
 
 import { PrivateRoute, Navbar } from "./Components";
@@ -40,6 +41,7 @@ export default function App() {
         <PrivateRoute path="/checkout" element={<Checkout />} />
         <PrivateRoute path="/addresses" element={<Addresses />} />
         <PrivateRoute path="/payments" element={<Payments />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

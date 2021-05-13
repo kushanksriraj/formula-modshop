@@ -1,24 +1,28 @@
 import { useState } from "react";
+import { useQueryParams } from "../../hooks";
 import { categoryList } from "../../utils/utils";
 import { CheckBox } from "./CheckBox";
 import { SortBox } from "./SortBox";
 
 export const MobileFilters = ({
-  deleteSearchParamList,
-  replaceSearchParams,
   categoryFilterList,
   sort,
   stockFilter,
   deliveryFilter,
-  setCheckBoxCatergory,
-  setCheckBoxFilter,
+  searchParams,
 }) => {
   const [showFilter, setShowFilter] = useState(false);
+  const {
+    deleteSearchParamList,
+    replaceSearchParams,
+    setCheckBoxFilter,
+    setCheckBoxCatergory,
+  } = useQueryParams(searchParams);
 
   return (
     <div className="option-box-mobile pos-rel">
-      <div className="tab border-1 flex space-around justify-center align-center p-2">
-        <div className="text-bold">Sort by</div>
+      <div className="border-1 flex space-between align-center p-2">
+        <div className="text-bold font-3">Sort by</div>
         <SortBox
           sort={sort}
           deleteSearchParamList={deleteSearchParamList}
@@ -27,14 +31,14 @@ export const MobileFilters = ({
       </div>
 
       <div
-        className="tab border-1 p-4 text-center"
+        className="border-1 p-4 text-center"
         onClick={() => setShowFilter(true)}
       >
         <span className="text-bold m-h-2">Filter</span>
       </div>
 
       <div
-        className="panel pos-fix h-6 z-sm bg-color-white box-shadow p-2 p-v-5 bottom"
+        className="pos-fix h-fit z-sm bg-color-white box-shadow p-2 p-v-5 bottom m-2"
         style={{ display: showFilter ? "block" : "none" }}
       >
         <span

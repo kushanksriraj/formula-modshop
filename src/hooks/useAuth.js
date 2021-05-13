@@ -34,7 +34,7 @@ export const useAuth = () => {
                 `${BASE_URL}/user-data/${response.data.user._id}`
               );
               if (
-                user.data.cartList.some(({ product }) => product === productId)
+                user.data.cartList?.some(({ product }) => product === productId)
               ) {
                 break;
               }
@@ -52,7 +52,9 @@ export const useAuth = () => {
                 `${BASE_URL}/user-data/${response.data.user._id}`
               );
 
-              if (user.data.wishList.some((product) => product === productId)) {
+              if (
+                user.data.wishList?.some((product) => product === productId)
+              ) {
                 break;
               }
               await axios.post(
@@ -73,7 +75,7 @@ export const useAuth = () => {
 
       setIsUserLoggedIn(true);
       setUserData(response.data.user);
-
+      console.log({ redirectPath });
       if (redirectPath) {
         navigate(redirectPath, { replace: true });
         return;

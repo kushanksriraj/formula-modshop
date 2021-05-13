@@ -11,3 +11,4 @@ export { Products } from "./Products/Products";
 export { Profile } from "./Profile/Profile";
 export { SignUp } from "./SignUp/SignUp";
 export { WishList } from "./WishList/WishList";
+export { NotFound } from "./NotFound/NotFound";
