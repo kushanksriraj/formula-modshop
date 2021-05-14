@@ -1,36 +1,43 @@
-import styles from "./ProductCard.module.css";
-import { WishListButton, CartModifyButtons, AddToCartButton } from "../";
 import { useNavigate } from "react-router-dom";
+import { AddToCart, ToggleWishList } from "../";
 
-export const ProductCard = ({ _id, imageUrl, name, price, renderedIn }) => {
+export const ProductCard = ({ product }) => {
   const navigate = useNavigate();
+  const inStock = product.stock > 0;
 
   return (
-    <div className={styles.productCard}>
-      <div onClick={() => navigate(`/product/${_id}`)}>
-        <div className={styles.image}>
-          <img className="img-responsive" src={imageUrl} alt={name} />
+    <div className="box-shadow flex-col cur-point pos-rel product-card p-2">
+      <div
+        onClick={() => navigate(`/product/${product._id}`)}
+        className="w-100 p-4 flex-col"
+      >
+        <div className="flex-grow pos-rel">
+          <img
+            className="img-responsive"
+            style={{ filter: !inStock && "grayscale(100%)" }}
+            src={product.imageUrl}
+            alt={product.name}
+            loading="lazy"
+          />
+          {!inStock && (
+            <div className="pos-abs top w-100 h-100 flex place-center">
+              <div className="w-100 text-center p-2 bg-color-2 text-bold color-1">
+                Out of stock!
+              </div>
+            </div>
+          )}
         </div>
+        <div className="m-1 product-name">{product.name}</div>
+      </div>
+      <div className="text-bold m-h-4 flex-grow">₹{product.price}</div>
 
-        <div>
-          <div className={styles.title}>{name}</div>
-          <div className={styles.price}>₹{price}</div>
-        </div>
+      <div className="flex place-center w-100">
+        <AddToCart _id={product._id} inStock={inStock} />
       </div>
 
-      <div className={styles.wishListBtn}>
-        <WishListButton _id={_id} />
+      <div className="pos-abs top-right m-2">
+        <ToggleWishList _id={product._id} />
       </div>
-
-      {renderedIn === "cart" ? (
-        <div className={styles.cartModifyBtn}>
-          <CartModifyButtons _id={_id} />
-        </div>
-      ) : (
-        <div className={styles.addToCartBtn}>
-          <AddToCartButton _id={_id} />
-        </div>
-      )}
     </div>
   );
 };

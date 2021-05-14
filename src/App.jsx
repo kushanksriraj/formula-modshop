@@ -1,48 +1,47 @@
 import "./styles.css";
-import { useEffect, useState } from "react";
-import { useAxios, useCart, useProduct, useWishList } from "./hooks";
-import { Navbar } from "./Components";
-import { Products, Cart, WishList, Checkout, ProductPage } from "./Routes";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import {
+  Home,
+  Products,
+  ProductInfo,
+  Login,
+  SignUp,
+  WishList,
+  Cart,
+  Profile,
+  Orders,
+  OrderInfo,
+  Checkout,
+  Addresses,
+  Payments,
+  NotFound,
+} from "./pages";
+
+import { PrivateRoute, Navbar } from "./Components";
+import { Routes, Route } from "react-router-dom";
+import { useAuthPersist } from "./hooks/useAuthPersist";
 
 export default function App() {
-  const { setProductList } = useProduct();
-  const { apiCall, response, isLoading } = useAxios();
-  const [search, setSearch] = useState("");
-  const navigate = useNavigate();
-  const { initializeWishList } = useWishList();
-  const { initializeCart } = useCart();
-
-  useEffect(() => {
-    apiCall({
-      type: "get",
-      url: "https://modshop.kushanksriraj.repl.co/load-data",
-    });
-    // navigate("/products");
-  }, []);
-
-  useEffect(() => {
-    console.log(response);
-    if (response && response.status === 200) {
-      setProductList(response.data.products);
-      initializeWishList(response.data.wishlist);
-      initializeCart(response.data.cartlist);
-    }
-  }, [response]);
+  useAuthPersist();
 
   return (
     <div className="App">
-      <Navbar search={search} setSearch={setSearch} />
-
+      <Navbar />
       <Routes>
-        <Route
-          path="/"
-          element={<Products search={search} isLoading={isLoading} />}
-        />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/wishlist" element={<WishList />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/product/:productId" element={<ProductPage />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/product/:id" element={<ProductInfo />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/sign-up" element={<SignUp />} />
+
+        <PrivateRoute path="/wishlist" element={<WishList />} />
+        <PrivateRoute path="/cart" element={<Cart />} />
+        <PrivateRoute path="/profile" element={<Profile />} />
+        <PrivateRoute path="/orders" element={<Orders />} />
+        <PrivateRoute path="/order/:id" element={<OrderInfo />} />
+        <PrivateRoute path="/checkout" element={<Checkout />} />
+        <PrivateRoute path="/addresses" element={<Addresses />} />
+        <PrivateRoute path="/payments" element={<Payments />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

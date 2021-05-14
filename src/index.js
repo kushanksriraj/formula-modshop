@@ -1,34 +1,29 @@
-import { StrictMode } from "react";
 import ReactDOM from "react-dom";
-import {
-  ControlProvider,
-  ProductProvider,
-  CartProvider,
-  WishListProvider
-} from "./contexts";
-
+import { StrictMode } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-
-import mockServer from "./api/mock.server";
-
 import App from "./App";
-
-// mockServer();
+import {
+  ProductDataProvider,
+  UserDataProvider,
+  AuthProvider,
+} from "./contexts";
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <StrictMode>
-    <ControlProvider>
-      <ProductProvider>
-        <CartProvider>
-          <WishListProvider>
-            <Router>
+    {/* AuthProvider : just login, logout, apicall to login and localstorage to save userId and login status */}
+    {/* UserDataProvider: User name, cart, wishlist, orders, addresses, payments */}
+    {/* ProductDataProvider: Product list,  */}
+
+    <ProductDataProvider>
+      <UserDataProvider>
+        <AuthProvider>
+          <Router>
             <App />
-            </Router>
-          </WishListProvider>
-        </CartProvider>
-      </ProductProvider>
-    </ControlProvider>
+          </Router>
+        </AuthProvider>
+      </UserDataProvider>
+    </ProductDataProvider>
   </StrictMode>,
   rootElement
 );

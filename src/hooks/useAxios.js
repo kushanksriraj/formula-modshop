@@ -14,7 +14,7 @@ export const useAxios = () => {
       setResponse(res);
     } catch (error) {
       setIsError(true);
-      console.log(error);
+      console.error(error);
     } finally {
       setIsLoading(false);
     }
