@@ -1,4 +1,4 @@
-export const BASE_URL = "https://modshop-v2.kushanksriraj.repl.co";
+export const BASE_URL = "https://modshop-backend.kushanksriraj.repl.co";
 
 // get this data from api
 export const categoryList = [
